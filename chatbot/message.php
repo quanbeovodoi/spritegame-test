@@ -7,6 +7,7 @@ $servername = "sql6.freemysqlhosting.net";
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Database Error");
+    mysqli_set_charset($conn, 'UTF8');
 
 // getting user message through ajax
 $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
