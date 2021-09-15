@@ -1,6 +1,12 @@
 <?php
 // connecting to database
-$conn = mysqli_connect("localhost", "root", "", "db_webspritegame") or die("Database Error");
+$servername = "sql6.freemysqlhosting.net";
+    $username = "sql6437287";
+    $password = "r8cdGmdER7";
+    $dbname = "sql6437287";
+
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Database Error");
 
 // getting user message through ajax
 $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
