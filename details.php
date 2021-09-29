@@ -22,11 +22,10 @@
     <link rel="stylesheet" href="css/swiper.min.css">
     <!--css-->
     <link rel="stylesheet" href="css/details.css">
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <!-- php get product your chose -->
 <?php
-
 if (isset($_GET['product_id'])) {
 
     $product_id = $_GET['product_id'];
@@ -54,8 +53,12 @@ if (isset($_GET['product_id'])) {
         $product_sale = $row_product['product_sale'];
 
         $product_rated = $row_product['Rate'];
+    //comment
+
 
 }
+
+
 ?>
 <!-- end php get product your chose -->
 <body  onload="showRestaurantData('rating/getRatingDataOnlyOne.php?product_id=<?php echo $product_id; ?>')">
@@ -233,7 +236,6 @@ if (isset($_GET['product_id'])) {
                     $avg=mysqli_query($conn, $avgQuery);
                     $ratingsum = $avg;
                     $math_rate = mysqli_fetch_assoc($ratingsum);
-                    echo '<p>' . $math_rate['rateRow'] . '</p>'
                  ?>
                 <!--Add Arrows-->
                 <div class="sliderNavigation">
@@ -285,7 +287,6 @@ if (isset($_GET['product_id'])) {
                             <form action="details.php?add_cart=<?php echo $product_id; ?>" method="post">
                         </div>
                     </div>
-
                     <button class="btn" type="submit">
                         <img src="assets/shopping-cart-w.svg" alt="">
                         <span>thêm vào giỏ</span>
@@ -294,9 +295,37 @@ if (isset($_GET['product_id'])) {
                             <!--end Form-->
                 </div>
             </section>
-
         </div>
         <!--end Content-->
+        <div class="cmt">
+            <div class="form">
+                <div class="bot-inbox inbox">
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="TitleCmt">Bình luận</h3>
+                    <div class="msg-header">
+                        <p></p>
+                        <?php
+                            $get_comment = "select * from comments";
+                            $run_comment = mysqli_query($conn, $get_comment);
+                            while ($row_comment = mysqli_fetch_array($run_comment)){
+                                $cus_id = $row_comment['id_cus'];
+                                $cus_comment = $row_comment['comment'];
+                            
+                        ?>
+                        <p><?php echo $cus_comment  ?></p>
+                        <?php }?>
+                    </div>
+                </div>
+            </div>
+            <div class="typing-field">
+                <div class="input-data">
+                    <input id="data" type="text" placeholder="Viết gì đó..." required>
+                    <button class="btn" id="send-btn">Gửi</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!--script swiper-->
@@ -325,6 +354,24 @@ if (isset($_GET['product_id'])) {
 
         });
 
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#send-btn").on("click", function(){
+                $value = $("#data").val();
+                $msg = '<p>'+ $value +'</p>';
+                $("#data").val('');
+                $.ajax({
+                    url: 'comments.php',
+                    type: 'POST',
+                    data: 'text='+$value,
+                    success: function(result){
+                        $replay = '<p>'+ result +'</p>';
+                        $(".form .msg-header").append($replay);
+                    }
+                });
+            });
+        });
     </script>
 
 </body>

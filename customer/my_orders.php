@@ -74,7 +74,7 @@
                 <td><?php echo $order_date; ?></td>
                 <td><?php echo $order_status; ?></td>
                 <td>
-                <a href="#">
+                <a href="../payment?product_id=<?php echo $product_id; ?>">
                     <button class="button">Thanh toán</button>
                 </a>
                 </td>

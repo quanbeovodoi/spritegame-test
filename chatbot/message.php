@@ -1,13 +1,6 @@
 <?php
 // connecting to database
-$servername = "sql6.freemysqlhosting.net";
-    $username = "sql6437287";
-    $password = "r8cdGmdER7";
-    $dbname = "sql6437287";
-
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Database Error");
-    mysqli_set_charset($conn, 'UTF8');
+$conn = mysqli_connect("sql6.freemysqlhosting.net", "sql6437287", "r8cdGmdER7", "sql6437287") or die("Database Error");
 
 // getting user message through ajax
 $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
@@ -24,7 +17,7 @@ if(mysqli_num_rows($run_query) > 0){
     $replay = $fetch_data['replies'];
     echo $replay;
 }else{
-    echo "Sorry can't be able to understand you!";
+    echo "Bạn có thể viết lại được không!? :)))";
 }
 
 ?>

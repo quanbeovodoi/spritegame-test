@@ -33,10 +33,14 @@
     <meta property="og:title" content="quanThang / portfolio" />
     <meta property="og:image" content="/images/fb_thumb.png" />
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery-331.min.js"></script>
     
 </head>
 <body>
+    <div id="preloder">
+		<div class="loader">
+        </div>
+	</div>
     <!--Navigation-->
     <div class="menu-mobile">
 
@@ -63,7 +67,6 @@
     </div>
         
     <nav>
-
         <a href="index.php" class="mainLogo"> <img src="assets/logo.png" alt=""></a>
         <div class="menu">
             <div class="menulinks">
@@ -195,7 +198,7 @@
                         } else {
 
                             echo "
-                                <a href='shop.php'><button class='btn'>Mua Sắm Ngay</button></a>
+                                <a href='shop.php'><button class='btn'>Mua Ngay</button></a>
                             ";
                         }
                     ?>
@@ -221,12 +224,24 @@
     <!--Card-->
     <section class="wrapperCard">
         <h3 class="section__title">SpriteGame</h3>
+        <h2 style="
+            background:#f7f8fc;
+            width:fit-content;
+            margin:0 auto;
+            text-align: center;
+            line-height: normal;
+            text-transform: uppercase;
+            color: #58a6b7;
+            font-weight: 900;
+            padding:10px 15px 5px 15px;
+            border-radius:30px 30px 0px 0px;
+        ">Sản phẩm gần đây</h2>
         <div class="cards">
             <!--card-->
             <!-- php get product -->
             <?php 
 
-                $get_products = "select * from products order by 1 DESC";
+                $get_products = "select * from products order by 1 DESC LIMIT 0, 8";
 
                 $run_products = mysqli_query($conn, $get_products);
 
@@ -322,7 +337,7 @@
                     <div class="typing-field">
                         <div class="input-data">
                             <input id="data" type="text" placeholder="Hãy viết gì đó.." required>
-                            <button id="send-btn">Send</button>
+                            <button id="send-btn">Gửi</button>
                         </div>
                     </div>
             </div>
@@ -380,9 +395,6 @@
             });
         </script>
     <script>
-       
-
-        // swiper   
         var mySwiper = new Swiper('.swiper-container', {
             autoplay: {
                 delay: 5000,
@@ -401,7 +413,6 @@
                 clickable: 'true'
             },
         });
-
     </script>
 </body>
 </html>
