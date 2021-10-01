@@ -2,7 +2,7 @@
 session_set_cookie_params('86400');
 session_start();
 if(isset($_SESSION['customer_email'])){
-    $conn = mysqli_connect("localhost", "root", "", "db_webspritegame") or die("Database Error");
+    $conn = mysqli_connect("sql6.freemysqlhosting.net", "sql6441134", "kEdKPvNGTY", "sql6441134") or die("Database Error");
     $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
     $getPrdId = mysqli_real_escape_string($conn, $_POST['product_id']);
     $insert_product = "INSERT INTO `comments` ( `product_id`, `id_cus`, `comment`) VALUES ('$getPrdId', '2', '$getMesg');";
