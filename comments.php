@@ -1,4 +1,6 @@
 <?php
+session_set_cookie_params('86400');
+session_start();
 if(isset($_SESSION['customer_email'])){
     $conn = mysqli_connect("localhost", "root", "", "db_webspritegame") or die("Database Error");
     $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
