@@ -315,11 +315,15 @@ if(isset($_SESSION['customer_email'])){
                                 <div class="comment-form d-flex align-items-center">
                                     <div class="flex-shrink-0">
                                         <div class="avatar avatar-sm rounded-circle">
-                                            <img class="avatar-img" src="customer/customer_images/<?php echo $customer_image ?>" alt="">
+                                            <?php if(isset($_SESSION['customer_email'])){
+                                                echo "<img class='avatar-img' src='customer/customer_images/$customer_image' alt=''>";
+                                            }else{
+                                                echo "<img class='avatar-img' src='customer/customer_images/customer_default_2.png' alt=''>";
+                                            } ?>
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 ms-2 ms-sm-3">
-                                            <textarea id="data" class="form-control py-0 px-1 border-0" rows="1" placeholder="Start writing..." style="resize: none;"></textarea>
+                                            <textarea id="data" class="form-control py-0 px-1 border-0" rows="1" placeholder="Viết Bình Luận..." style="resize: none;"></textarea>
                                             <button class="btn-2" id="send-btn">Đăng</button>
                                     </div>
                                 </div>
@@ -469,7 +473,7 @@ if(isset($_SESSION['customer_email'])){
             $("#send-btn").on("click", function(){
                 $value = $("#data").val();
                 $msg = '<p>'+ $value +'</p>';
-                $img = 'customer/customer_images/<?php echo $customer_img ?>';
+                $img = 'customer/customer_images/<?php if(isset($_SESSION['customer_email'])){echo $customer_img;}else{echo 'customer_default_2.png';}  ?>';
                 $("#data").val('');
                 if($value != null && $value != '' ){
                         $.ajax({
@@ -477,7 +481,7 @@ if(isset($_SESSION['customer_email'])){
                         type: 'POST',
                         data: {text: $value,product_id: <?php echo $product_id?>},
                         success: function(result){
-                            $replay = '<div class="comment d-flex  mb-4"><div class="flex-shrink-0"><div class="avatar avatar-sm rounded-circle"><img class="avatar-img" src="' + $img + '" alt=""></div></div><div class="flex-shrink-1 ms-2 ms-sm-3"><div class="comment-meta d-flex"><h6 class="me-2"><?php echo $customer_name ?></h6><span class="text-muted">4d</span></div><div class="comment-body">'+ result +'</div></div></div>';
+                            $replay = '<div class="comment d-flex  mb-4"><div class="flex-shrink-0"><div class="avatar avatar-sm rounded-circle"><img class="avatar-img" src="' + $img + '" alt=""></div></div><div class="flex-shrink-1 ms-2 ms-sm-3"><div class="comment-meta d-flex"><h6 class="me-2"><?php if(isset($_SESSION['customer_email'])){echo $customer_name;}else{echo 'Người dùng';} ?></h6><span class="text-muted">4d</span></div><div class="comment-body">'+ result +'</div></div></div>';
                             $(".form .msg-header .comments").prepend($replay);
                         }
                     });
