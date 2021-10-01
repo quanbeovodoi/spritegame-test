@@ -30,7 +30,7 @@
     <meta name="keywords"
         content="quanbodoi, quanbodoi designer,graphic design,ui design,web design,wine labels,packaging design,label design,ui designer" />
 
-    <meta property="og:title" content="quanThang / portfolio" />
+    <meta property="og:title" content="Spritegame / portfolio" />
     <meta property="og:image" content="/images/fb_thumb.png" />
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="js/jquery-331.min.js"></script>

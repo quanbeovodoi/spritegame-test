@@ -57,7 +57,14 @@ if (isset($_GET['product_id'])) {
 
 
 }
-
+if(isset($_SESSION['customer_email'])){
+    $session_email = $_SESSION['customer_email'];
+    $get_customer = "select * from customers where customer_email='$session_email'";
+    $run_customer = mysqli_query($conn, $get_customer);
+    $row_customer = mysqli_fetch_array($run_customer);
+    $customer_name = $row_customer['customer_name'];
+    $customer_img = $row_customer['customer_image'];
+}
 
 ?>
 <!-- end php get product your chose -->
@@ -297,35 +304,137 @@ if (isset($_GET['product_id'])) {
             </section>
         </div>
         <!--end Content-->
-        <div class="cmt">
-            <div class="form">
-                <div class="bot-inbox inbox">
-                    <div class="icon">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <h3 class="TitleCmt">Bình luận</h3>
-                    <div class="msg-header">
-                        <p></p>
-                        <?php
-                            $get_comment = "select * from comments";
-                            $run_comment = mysqli_query($conn, $get_comment);
-                            while ($row_comment = mysqli_fetch_array($run_comment)){
-                                $cus_id = $row_comment['id_cus'];
-                                $cus_comment = $row_comment['comment'];
+        <!-- comment -->
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="cmt">
+                <div class="form">
+                    <div class="bot-inbox inbox">
+                        <h3 class="TitleCmt row justify-content-center mb-4">Bình luận</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="comment-form d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar avatar-sm rounded-circle">
+                                            <img class="avatar-img" src="customer/customer_images/<?php echo $customer_image ?>" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2 ms-sm-3">
+                                            <textarea id="data" class="form-control py-0 px-1 border-0" rows="1" placeholder="Start writing..." style="resize: none;"></textarea>
+                                            <button class="btn-2" id="send-btn">Đăng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:100%;height:20px;padding:10px"></div>
+                        <div class="msg-header row justify-content-center mb-4">
+                            <div class="col-lg-8">
+                                <!-- comment content -->
+                                <div class="comments">
+                                    <!-- <div class="comment d-flex mb-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar avatar-sm rounded-circle">
+                                                <img class="avatar-img" src="https://uifaces.co/our-content/donated/AW-rdWlG.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2 ms-sm-3">
+                                            <div class="comment-meta d-flex align-items-baseline">
+                                                <h6 class="me-2">Jordan Singer</h6>
+                                                <span class="text-muted">2d</span>
+                                            </div>
+                                            <div class="comment-body">
+                                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non minima ipsum at amet doloremque qui magni, placeat deserunt pariatur itaque laudantium impedit aliquam eligendi repellendus excepturi quibusdam nobis esse accusantium.
+                                            </div>
                             
-                        ?>
-                        <p><?php echo $cus_comment  ?></p>
-                        <?php }?>
+                                            <div class="comment-replies bg-light p-3 mt-3 rounded">
+                                                <h6 class="comment-replies-title mb-4 text-muted text-uppercase">2 replies</h6>
+                            
+                                                <div class="reply d-flex mb-4">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar avatar-sm rounded-circle">
+                                                            <img class="avatar-img" src="https://images.unsplash.com/photo-1501325087108-ae3ee3fad52f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=faces&amp;fit=crop&amp;h=200&amp;w=200&amp;s=f7f448c2a70154ef85786cf3e4581e4b" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2 ms-sm-3">
+                                                        <div class="reply-meta d-flex align-items-baseline">
+                                                            <h6 class="mb-0 me-2">Brandon Smith</h6>
+                                                            <span class="text-muted">2d</span>
+                                                        </div>
+                                                        <div class="reply-body">
+                                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="reply d-flex">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar avatar-sm rounded-circle">
+                                                            <img class="avatar-img" src="https://uifaces.co/our-content/donated/6f6p85he.jpg" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2 ms-sm-3">
+                                                        <div class="reply-meta d-flex align-items-baseline">
+                                                            <h6 class="mb-0 me-2">James Parsons</h6>
+                                                            <span class="text-muted">1d</span>
+                                                        </div>
+                                                        <div class="reply-body">
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolore sed eos sapiente, praesentium.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <?php
+                                        $get_comment = "select * from comments where product_id = '$product_id' order by id DESC";
+                                        $run_comment = mysqli_query($conn, $get_comment);
+                                        while ($row_comment = mysqli_fetch_array($run_comment)){
+                                        $cus_id = $row_comment['id_cus'];
+                                        $cus_comment = $row_comment['comment'];
+                                        $date_comment = $row_comment['date'];
+                                        $get_customer = "select * from customers where customer_id='$cus_id'";
+                                        $run_customer = mysqli_query($conn, $get_customer);
+                                        $row_customer = mysqli_fetch_array($run_customer);
+                                        $customer_name = $row_customer['customer_name'];
+                                        $customer_image = $row_customer['customer_image'];
+                                    ?>
+                                    <div class="comment d-flex  mb-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar avatar-sm rounded-circle">
+                                                <img class="avatar-img" src="customer/customer_images/<?php echo $customer_image ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-1 ms-2 ms-sm-3">
+                                            <div class="comment-meta d-flex">
+                                                <h6 class="me-2"><?php echo $customer_name ?></h6>
+                                                <span class="text-muted">
+                                                    <?php
+                                                        $dt = new DateTime($date_comment);
+                                                        echo $dt->format('Y-m-d');
+                                                    ?>
+                                                </span>
+                                            </div>
+                                            <div class="comment-body">
+                                                <?php echo $cus_comment ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php }?>
+                                    
+                                </div>
+                                <!-- end comment content -->
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="typing-field">
-                <div class="input-data">
-                    <input id="data" type="text" placeholder="Viết gì đó..." required>
-                    <button class="btn" id="send-btn">Gửi</button>
-                </div>
+                <!-- <div class="typing-field ">
+                    <div class="input-data">
+                        <input id="data" type="text" placeholder="Viết gì đó..." required>
+                        <button class="btn-2" id="send-btn">Gửi</button>
+                    </div>
+                </div> -->
             </div>
         </div>
+        <!-- end comment -->
+        
     </div>
 
     <!--script swiper-->
@@ -360,16 +469,19 @@ if (isset($_GET['product_id'])) {
             $("#send-btn").on("click", function(){
                 $value = $("#data").val();
                 $msg = '<p>'+ $value +'</p>';
+                $img = 'customer/customer_images/<?php echo $customer_img ?>';
                 $("#data").val('');
-                $.ajax({
-                    url: 'comments.php',
-                    type: 'POST',
-                    data: 'text='+$value,
-                    success: function(result){
-                        $replay = '<p>'+ result +'</p>';
-                        $(".form .msg-header").append($replay);
-                    }
-                });
+                if($value != null && $value != '' ){
+                        $.ajax({
+                        url: 'comments.php',
+                        type: 'POST',
+                        data: {text: $value,product_id: <?php echo $product_id?>},
+                        success: function(result){
+                            $replay = '<div class="comment d-flex  mb-4"><div class="flex-shrink-0"><div class="avatar avatar-sm rounded-circle"><img class="avatar-img" src="' + $img + '" alt=""></div></div><div class="flex-shrink-1 ms-2 ms-sm-3"><div class="comment-meta d-flex"><h6 class="me-2"><?php echo $customer_name ?></h6><span class="text-muted">4d</span></div><div class="comment-body">'+ result +'</div></div></div>';
+                            $(".form .msg-header .comments").prepend($replay);
+                        }
+                    });
+                }
             });
         });
     </script>
