@@ -1,6 +1,6 @@
 <?php
 // connecting to database
-$conn = mysqli_connect("sql6.freemysqlhosting.net", "sql6441134", "kEdKPvNGTY", "sql6441134") or die("Database Error");
+include("includes/db.php");
 
 // getting user message through ajax
 $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
