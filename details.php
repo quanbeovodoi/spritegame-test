@@ -54,8 +54,13 @@ if (isset($_GET['product_id'])) {
 
         $product_rated = $row_product['Rate'];
     //comment
+        if($row_product==null){
+            echo "<script>window.open('404error.php','_self')</script>";
+        }
 
-
+}
+else{
+    echo "<script>window.open('404error.php','_self')</script>";
 }
 if(isset($_SESSION['customer_email'])){
     $session_email = $_SESSION['customer_email'];
@@ -569,7 +574,60 @@ if(isset($_SESSION['customer_email'])){
         <!-- end comment -->
         
     </div>
-
+    <div class="footerQ">
+        <section class="footer">
+            <div class="link-row">
+                <div class="address-column">
+                    <h3>SpriteGame</h3>
+                    <p>Web cung cấp tài nguyên Game<br />Việt Nam 2021</p>
+                </div>
+                <div class="link-column">
+                    <ul>
+                        <li><span>Website</span></li>
+                        <li><a href="/websites">Trang chủ</a></li>
+                        <li><a href="/email">Cửa hàng</a></li>
+                        <li><a href="/status">Liên hệ</a></li>
+                        <li><a href="/security">Giỏ hàng</a></li>
+                    </ul>
+                    <ul>
+                        <li><span>Resources</span></li>
+                        <li>
+                        <a href="/knowledge-base" rel="noopener noreferrer"
+                            >Knowledge Base</a
+                        >
+                        </li>
+                        <li>
+                        <a href="/api-documentation" rel="noopener noreferrer"
+                            >API Documentation</a
+                        >
+                        </li>
+                        <li>
+                            <a href="/developers" rel="noopener noreferrer">Developers</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span>Sprite Game</span></li>
+                        <li>
+                            <a href="/our-story" rel="noopener noreferrer">My story</a>
+                        </li>
+                        <li><a href="/events" rel="noopener noreferrer">Sự kiện</a></li>
+                        <li><a href="/careers" rel="noopener noreferrer">Tin tức</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-row">
+                <div class="copyright-column">
+                <p>&copy; 2021 Some Company, Inc. All rights reserved.</p>
+                </div>
+                <div class="social-column">
+                <a href="your-instagram" target="_blank" rel="noopener noreferrer">Tiktok</a>
+                <a href="your-twitter" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="your-facebook-account" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="your-youtube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                </div>
+            </div>
+        </section>
+    </div>
     <!--script swiper-->
     <script src="js/swiper.min.js"></script>
     <!--script-->
@@ -610,7 +668,7 @@ if(isset($_SESSION['customer_email'])){
                         type: 'POST',
                         data: {text: $value,product_id: <?php echo $product_id?>},
                         success: function(result){
-                            $replay = '<div class="comment d-flex  mb-4"><div class="flex-shrink-0"><div class="avatar avatar-sm rounded-circle"><img class="avatar-img" src="' + $img + '" alt=""></div></div><div class="flex-shrink-1 ms-2 ms-sm-3"><div class="comment-meta d-flex"><h6 class="me-2"><?php if(isset($_SESSION['customer_email'])){echo $customer_name;}else{echo 'Người dùng';} ?></h6><span class="text-muted">4d</span></div><div class="comment-body">'+ result +'</div></div></div>';
+                            $replay = '<div class="comment d-flex  mb-4"><div class="flex-shrink-0"><div class="avatar avatar-sm rounded-circle"><img class="avatar-img" src="' + $img + '" alt=""></div></div><div class="flex-shrink-1 ms-2 ms-sm-3"><div class="comment-meta d-flex"><h6 class="me-2"><?php if(isset($_SESSION['customer_email'])){echo $customer_name;}else{echo 'Người dùng';} ?></h6><span class="text-muted">Mới</span></div><div class="comment-body">'+ result +'</div></div></div>';
                             $(".form .msg-header .comments").prepend($replay);
                         }
                     });
@@ -643,7 +701,7 @@ function mouseOverRating(restaurantId, rating) {
     for (var i = 1; i <= rating; i++)
     {
         var ratingId = restaurantId + "_" + i;
-        document.getElementById(ratingId).style.color = "#ff6e00";
+        document.getElementById(ratingId).style.color = "#57e4ea";
 
     }
 }
@@ -662,7 +720,7 @@ function mouseOutRating(restaurantId, userRating) {
     if(userRating !=0) {
             for (var i = 1; i <= userRating; i++) {
                     ratingId = restaurantId + "_" + i;
-                    document.getElementById(ratingId).style.color = "#ff6e00";
+                    document.getElementById(ratingId).style.color = "#57e4ea";
             }
     }
     if(userRating <= 5) {

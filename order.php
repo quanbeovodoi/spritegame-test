@@ -21,7 +21,7 @@
 
     if (!isset($_SESSION['customer_email'])) {
 
-        echo "<script>window.open('customer/login.php','self')</script>";
+        echo "<script>window.open('customer/login.php','_self')</script>";
         
     } else {
 

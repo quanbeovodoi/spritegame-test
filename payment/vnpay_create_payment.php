@@ -45,11 +45,11 @@ if (isset($_GET['product_id'])) {
         $product_rated = $row_product['Rate'];
 
 }
-$vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-$vnp_OrderInfo = $_POST['order_desc'];
-$vnp_OrderType = $_POST['order_type'];
+$vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+$vnp_OrderInfo = 'Thanh toan san pham '. $product_title;
+$vnp_OrderType = 'billpayment';
 $vnp_Amount = str_replace(',', '', $product_price*1000) * 100;
-$vnp_Locale = $_POST['language'];
+$vnp_Locale = 'vn';
 $vnp_BankCode = $_POST['bank_code'];
 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
 
@@ -94,5 +94,10 @@ if (isset($vnp_HashSecret)) {
 $returnData = array('code' => '00'
     , 'message' => 'success'
     , 'data' => $vnp_Url);
-echo json_encode($returnData);
+    if (isset($_POST['redirect'])) {
+        header('Location: ' . $vnp_Url);
+        die();
+    } else {
+        echo json_encode($returnData);
+    }
 }

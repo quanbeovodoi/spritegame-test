@@ -135,7 +135,7 @@ if (isset($_GET['product_id'])) {
                     </div>
 
                     <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Popup</button>
-                    <button type="submit" class="btn btn-default">Thanh toán Redirect</button>
+                    <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán Redirect</button>
 
                 </form>
             </div>
@@ -148,7 +148,7 @@ if (isset($_GET['product_id'])) {
         </div>  
         <link href="https://sandbox.vnpayment.vn/paymentv2/lib/vnpay/vnpay.css" rel="stylesheet"/>
         <script src="https://sandbox.vnpayment.vn/paymentv2/lib/vnpay/vnpay.js"></script>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             $("#btnPopup").click(function () {
                 var postData = $("#create_form").serialize();
                 var submitUrl = $("#create_form").attr("action");
@@ -172,7 +172,7 @@ if (isset($_GET['product_id'])) {
                 });
                 return false;
             });
-        </script>
+        </script> -->
 
 
     </body>
