@@ -237,13 +237,142 @@ if(isset($_SESSION['customer_email'])){
                             </ul>
                         </div>
                     </div>
+                    <!-- tinh rate star -->
+                    <?php
+                    for ($count = 1; $count <= 5; $count ++){
+                        $avgQforID="SELECT SUM(ratingnumber) AS rateRow FROM ratestart WHERE ratingnumber = '$count'AND product_id = '$product_id' ";
+                        $avgQforIDqr=mysqli_query($conn, $avgQforID);
+                        $fetch=mysqli_fetch_assoc($avgQforIDqr);
+                        $number = $fetch;
+                        $sumarray+=$number['rateRow'];
+                        $number_rate_forID[$count]+=$number['rateRow'];
+                    }
+                    // echo $sumarray;
+                    for ($count = 1; $count <= 5; $count ++){
+                        $percent[$count]= round($number_rate_forID[$count]/$sumarray,1)*100 . '%';
+                    }
+                        // $avgQforIDqr=mysqli_query($conn, $avgQforID);
+                        // $avgrate = $avgQforIDqr;
+                        // $rsRateId = mysqli_fetch_assoc($avgrate); 
+                        $avgQuery="SELECT AVG(ratingnumber) AS rateRow FROM ratestart WHERE product_id = '$product_id'";
+                        $avg=mysqli_query($conn, $avgQuery);
+                        $ratingsum = $avg;
+                        $math_rate = mysqli_fetch_assoc($ratingsum);
+                        // echo '<p>' . $math_rate['rateRow'] . '</p>'
+                    
+                    ?>
+                    <!-- ket thuc tinh ratestar -->
+                    <div class="rating-details">
+                        <!-- section rate -->
+                        <div style="display: none;">
+                            <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="svg-icon icon-star-new app-reviews__score-icon app-rating__icon" width="1024"  height="1024" ><defs><symbol id="icon-star-new" viewBox="0 0 1024 1024"><path d="M546.523429 128.365714l95.780571 173.824c11.958857 20.699429 31.926857 33.097143 51.858286 41.398857l187.538285 41.398858c31.926857 8.265143 43.885714 45.531429 19.931429 70.363428l-127.634286 148.992a78.189714 78.189714 0 0 0-19.968 66.194286l19.931429 198.729143c4.022857 33.097143-27.940571 53.76-55.844572 41.362285l-175.542857-82.761142a85.138286 85.138286 0 0 0-63.853714 0L303.177143 910.628571c-27.940571 12.434286-59.867429-12.434286-55.881143-41.362285l19.968-198.692572c3.986286-24.868571-4.022857-45.531429-19.968-66.194285L119.625143 455.314286c-19.968-24.868571-7.972571-62.098286 19.931428-70.4l187.538286-41.362286c23.954286-4.132571 39.899429-20.699429 51.858286-41.398857l95.780571-173.860572c15.945143-24.832 55.844571-24.832 71.789715 0z"></path></symbol></defs><use xlink:href="#icon-star-new" fill="#15C5CE"></use></svg>
+                        </div>
+                        <section class="section-card">
+                            <header class="section-card__header">
+                                <div class="section-card__header--left">
+                                    <div class="heading-m20-w22 font-bold section-card__title">XẾP HẠNG &amp; ĐÁNH GIÁ</div>
+                                    <span class="caption-m10-w12 gray-06"></span>
+                                </div>
+                                <div class="section-card__header--right primary-tap-blue">
+                                    <a data-v-19663232="" href="/app/224158/review" class="tap-router caption-m12-w14 flex-center--y"> Show
+                                        All </a>
+                                </div>
+                            </header>
+                            <main class="section-card__body">
+                                <div data-v-19663232="" class="tap-router">
+                                    <div class="app-reviews__header app-detail__review-score">
+                                        <div class="app-reviews__rating-block">
+                                            <div class="app-reviews__score-wrap flex-center">
+                                                <div class="app-rating app-reviews__score flex-center--y"><svg
+                                                        class="svg-icon icon-star-new app-reviews__score-icon app-rating__icon">
+                                                        <use xlink:href="#icon-star-new"></use>
+                                                    </svg>
+                                                    <div class="app-reviews__score-number app-rating__number font-bold rate-number-font">
+                                                        <?php echo round($math_rate['rateRow'],1) ?> </div>
+                                                </div><span class="heading-m14-w16 primary-tap-blue"> <?php 
+                                                $countRv="SELECT COUNT(*) AS rateRow FROM ratestart WHERE product_id = '$product_id' ";
+                                                $countRv_query=mysqli_query($conn, $countRv);
+                                                $countRv_query_fetch=mysqli_fetch_assoc($countRv_query);
+                                                echo $countRv_query_fetch['rateRow'];
+                                                ?>
+                                                 Reviews </span>
+                                            </div>
+                                            <div class="app-reviews__rating-statistics">
+                                                <div class="rating-statistics__item flex-center--y">
+                                                    <div class="app-reviews__star-level flex-center--y"><svg
+                                                            class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg></div>
+                                                    <div class="app-reviews__progress app-reviews__progress--5">
+                                                        <div class="app-reviews__progress-inner" style="width: <?php echo $percent[5];?>"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="rating-statistics__item flex-center--y">
+                                                    <div class="app-reviews__star-level flex-center--y"><svg
+                                                            class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg></div>
+                                                    <div class="app-reviews__progress app-reviews__progress--4">
+                                                        <div class="app-reviews__progress-inner" style="width: <?php echo $percent[4];?>;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="rating-statistics__item flex-center--y">
+                                                    <div class="app-reviews__star-level flex-center--y"><svg
+                                                            class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg></div>
+                                                    <div class="app-reviews__progress app-reviews__progress--3">
+                                                        <div class="app-reviews__progress-inner" style="width: <?php echo $percent[3];?>"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="rating-statistics__item flex-center--y">
+                                                    <div class="app-reviews__star-level flex-center--y"><svg
+                                                            class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg><svg class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg></div>
+                                                    <div class="app-reviews__progress app-reviews__progress--2">
+                                                        <div class="app-reviews__progress-inner" style="width: <?php echo $percent[2];?>"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="rating-statistics__item flex-center--y">
+                                                    <div class="app-reviews__star-level flex-center--y"><svg
+                                                            class="svg-icon gray-03 icon-star-new">
+                                                            <use xlink:href="#icon-star-new"></use>
+                                                        </svg></div>
+                                                    <div class="app-reviews__progress app-reviews__progress--1">
+                                                        <div class="app-reviews__progress-inner" style="width: <?php echo $percent[1];?>"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                    </div>
+                                </div>
+                            </main>
+                        </section>
+                        <!-- end section -->
+                    </div>
                 </div>
-                <?php
-                    $avgQuery="SELECT AVG(ratingnumber) AS rateRow FROM ratestart";
-                    $avg=mysqli_query($conn, $avgQuery);
-                    $ratingsum = $avg;
-                    $math_rate = mysqli_fetch_assoc($ratingsum);
-                 ?>
                 <!--Add Arrows-->
                 <div class="sliderNavigation">
                     <div class="swiper-button-prev"></div>

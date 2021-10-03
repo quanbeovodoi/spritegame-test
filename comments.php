@@ -1,18 +1,18 @@
 <?php
-session_set_cookie_params('86400');
-session_start();
-if(isset($_SESSION['customer_email'])){
-    include("includes/db.php");
-    $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
-    $getPrdId = mysqli_real_escape_string($conn, $_POST['product_id']);
-    $insert_product = "INSERT INTO `comments` ( `product_id`, `id_cus`, `comment`) VALUES ('$getPrdId', '2', '$getMesg');";
-    $run_query = mysqli_query($conn, $insert_product) or die("Error");
-    if($run_query){
-        echo $getMesg;
+    session_set_cookie_params('86400');
+    session_start();
+    if(isset($_SESSION['customer_email'])){
+        include("includes/db.php");
+        $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
+        $getPrdId = mysqli_real_escape_string($conn, $_POST['product_id']);
+        $insert_product = "INSERT INTO `comments` ( `product_id`, `id_cus`, `comment`) VALUES ('$getPrdId', '2', '$getMesg');";
+        $run_query = mysqli_query($conn, $insert_product) or die("Error");
+        if($run_query){
+            echo $getMesg;
+        }
+    }else{
+        echo "Hãy đăng nhập để bình luận! ";
     }
-}else{
-    echo "Hãy đăng nhập để bình luận! ";
-}
 // connecting to database
 
 //checking user query to database query

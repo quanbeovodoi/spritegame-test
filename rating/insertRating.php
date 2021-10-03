@@ -34,11 +34,20 @@ if (isset($_POST["index"], $_POST["product_id"])) {
         $ratingsum = $avg;
         $math_rate = mysqli_fetch_assoc($ratingsum);
         $numberrate = (int)$math_rate['rateRow'];
-        echo "successssssss";
         $updatedRatePro = "UPDATE products SET Rate ='" . (int)$numberrate . "' WHERE product_id = '" . $productId . "'";
         mysqli_query($conn, $updatedRatePro);
         echo "success";
     } else {
-        echo "Already Voted!";
+        $insertQuery = "UPDATE ratestart SET ratingnumber='".$rating."'WHERE product_id = '" . $productId . "'AND id_cus = '" . $userId . "'" ;
+        $result = mysqli_query($conn, $insertQuery);
+        //rate sum
+        $avgQuery="SELECT AVG(ratingnumber) AS rateRow FROM ratestart WHERE product_id = '" . $productId . "'";
+        $avg=mysqli_query($conn, $avgQuery);
+        $ratingsum = $avg;
+        $math_rate = mysqli_fetch_assoc($ratingsum);
+        $numberrate = (int)$math_rate['rateRow'];
+        $updatedRatePro = "UPDATE products SET Rate ='" . (int)$numberrate . "' WHERE product_id = '" . $productId . "'";
+        mysqli_query($conn, $updatedRatePro);
+        echo "cAP NHAT";
     }
 }

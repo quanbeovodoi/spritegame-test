@@ -32,7 +32,7 @@ $outputString .= '
                                         
         if ($count <= $userRating) {
                                             
-            $outputString .= '<li value="' . $count . '" id="' . $starRatingId . '" class="star selected">&#9733;</li>';
+            $outputString .= '<li value="' . $count . '" id="' . $starRatingId . '" class="star selected"  onclick="addRating(' . $row_product['product_id'] . ',' . $count . ');" onMouseOver="mouseOverRating(' . $row_product['product_id'] . ',' . $count . ');">&#9733;</li>';
         } else {
             $outputString .= '<li value="' . $count . '"  id="' . $starRatingId . '" class="star" onclick="addRating(' . $row_product['product_id'] . ',' . $count . ');" onMouseOver="mouseOverRating(' . $row_product['product_id'] . ',' . $count . ');">&#9733;</li>';
         }
