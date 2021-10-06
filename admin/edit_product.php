@@ -46,6 +46,8 @@
 
         $p_rate = $row_edit['Rate'];
 
+        $link_url = $row_edit['linkURL'];
+
     }
 
         $get_p_cat = "select * from product_categories where product_category_id='$p_cat'";
@@ -300,16 +302,37 @@
                        
                    </div><!-- form-group Finish -->
                    <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Rate </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="product_rate" type="number" class="form-control" required value ="<?php echo $p_rate; ?>">
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
+                        
+                        <label class="col-md-3 control-label"> Đánh giá </label> 
+                        
+                        <div class="col-md-6"><!-- col-md-6 Begin -->
+                            
+                            <select name="product_rate" class="form-control"><!-- form-control Begin -->
+                                
+                                
+                                <option value='5' <?php if($p_rate == 5){echo 'selected';} ?>>5 sao</option>
+                                <option value='4' <?php if($p_rate == 4){echo 'selected';} ?>>4 sao</option>
+                                <option value='3' <?php if($p_rate == 3){echo 'selected';} ?>>3 sao</option>
+                                <option value='2' <?php if($p_rate == 2){echo 'selected';} ?>>2 sao</option>
+                                <option value='1' <?php if($p_rate == 1){echo 'selected';} ?>>1 sao</option>
+                                <option value='0' <?php if($p_rate == 0){echo 'selected';} ?>>0 sao</option>
+
+                            </select><!-- form-control Finish -->
+                            
+                        </div><!-- col-md-6 Finish -->
+                        
+                    </div><!-- form-group Finish -->
+                    <div class="form-group"><!-- form-group Begin -->
+                        
+                        <label class="col-md-3 control-label"> Link Url </label> 
+                        
+                        <div class="col-md-6"><!-- col-md-6 Begin -->
+                            
+                            <input name="product_url" type="text" class="form-control" required value ="<?php echo $link_url; ?>">
+                            
+                        </div><!-- col-md-6 Finish -->
+                        
+                    </div><!-- form-group Finish -->
                    <div class="form-group"><!-- form-group Begin -->
                        
                       <label class="col-md-3 control-label"> Mô tả Sản phẩm</label> 

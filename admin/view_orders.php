@@ -93,16 +93,18 @@
                                     
                                     <?php 
                                     
-                                        if($order_status=='Pending') {
-                                            
-                                            echo $order_status='Đang Chờ Xử Lý';
-                                            
-                                        } else {
-                                            
-                                            echo $order_status='Đã xác nhận';
-                                            
-                                        }
-                                    
+                                        if ($order_status=="0") {
+
+                                            $order_status = 'Chưa';
+                        
+                                        }else if ($order_status=="1") {
+                        
+                                            $order_status = 'Không thành công';
+                        
+                                        }else{
+                                            $order_status = 'Đã thanh toán';
+                                        }  
+                                        echo $order_status
                                     ?>
                                     
                                 </td>

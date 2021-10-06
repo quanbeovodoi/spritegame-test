@@ -145,111 +145,60 @@
     <script  src="js/search_open.js"></script>
     <script>
                     let templateLG = `
-                    <div class="subtitle">Đăng nhập</div>
+                    <div class="subtitle">Lấy Lại Mật Khẩu</div>
                 <!--form-->
-                <form action="login.php" method="post" enctype="multipart/form-data">
-                    
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="text" id='token' name='reset_link_token' value='<?php if (isset($_GET['token'])) {$getToken = $_GET['token']; echo $getToken;} ?>' required style="display:none">
                     <div class="input-wrapper">
                         <label for="email">E-mail</label>
-                        <input id="email" type="text" placeholder="Nhập email của bạn" name="customer_email" required>
+                        <input id="email" type="text" placeholder="Nhập email của bạn" name="email" required>
                     </div>
                     
                     <div class="input-wrapper">
                         <label for="password">Mật Khẩu</label>
-                        <input id="password" type="password" placeholder="Mật khẩu" name="customer_password" required>
+                        <input id="password" type="customer_password" placeholder="Mật khẩu" name="customer_password" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="repassword">Mật Khẩu</label>
+                        <input id="repassword" type="customer_password" placeholder="Mật khẩu" name="customer_repassword" required>
                     </div>
 
-                    <div class="account">
-
-                        <p>Chưa có tài khoản?<a class="link" href="../register.php">Đăng ký tại đây</a></p>
-                    </div>
-                    <div class="account">
-
-                        <p><a class="link" href="forget_password.php">Quên mật khẩu?</a></p>
-                    </div>
-                    <button name="login" class="btn">Đăng Nhập</button>
+                    <button name="password-reset-token" class="btn">Đổi mật khẩu</button>
                 </form>
                 <!--end form-->`;
                     document.getElementById('contentID').insertAdjacentHTML('beforeend',templateLG);
                 </script>
 </body>
 </html>
+
+
+
 <?php
+if(isset($_POST['customer_password']) && $_POST['customer_repassword'] && $_POST['reset_link_token'] && $_POST['email'])
+{
+$emailId = $_POST['email'];
+$token = $_POST['reset_link_token'];
 
-    if (isset($_POST['login'])) {
+$result = mysqli_query($conn,"SELECT * FROM customers WHERE customer_email='" . $emailId . "'");
+ 
+$row= mysqli_fetch_array($result);
 
-        $customer_email = $_POST['customer_email'];
+$customer_password = password_hash($_POST['customer_password'],PASSWORD_DEFAULT);
 
-        $customer_password = $_POST['customer_password'];
+if (!password_verify($_POST['customer_repassword'],$customer_password)) {
 
-        $get_customer = "select * from customers where customer_email='$customer_email'";
+  echo "<script>alert('Mật Khẩu Nhập Lại Chưa Đúng')</script>";
 
-        $run_customer = mysqli_query($conn, $get_customer);
+  exit();
 
-        $count_customer = mysqli_num_rows($run_customer);
-
-        $row_customer = mysqli_fetch_array($run_customer);
-
-            $customer_password_hash = $row_customer['customer_password'];
-
-        $get_ip = getRealIpUser();
-
-        $get_cart = "select * from cart where ip_add='$get_ip'";
-
-        $run_cart = mysqli_query($conn, $get_cart);
-
-        $count_cart = mysqli_num_rows($run_cart);
-
-        if ($count_customer==0) {
-
-            echo "<script>alert('Email Không Chính Xác, Vui Lòng Nhập Lại.')</script>";
-
-            exit();
-
-        }
-
-        if (!password_verify($_POST['customer_password'], $customer_password_hash)) {
-
-            echo "<script>alert('Mật Khẩu Không Chính Xác, Vui Lòng Nhập Lại.')</script>";
-
-            exit();
-        }
-
-        if ($row_customer['email_verified_at'] == null)
-            {
-                die("<script>
-                document.getElementById('contentID').style.display = 'none';
-                let templateNav = `<div class='verticalForm'>
-                Please verify your email <a class='link' href='vertification.php?email=$customer_email'>from here</a></div>`;
-                document.getElementById('vertification-yn').insertAdjacentHTML('beforeend',templateNav);
-                </script>");
-            }
-        if ($count_customer==1 AND $count_cart==0) {
-
-            $_SESSION['customer_email'] = $customer_email;
-
-            /*echo "<script>alert('Đăng Nhập Thành Công')</script>";*/
-
-            echo "<script>window.open('my_account.php?my_orders','_self')</script>";
-
-        } else {
-
-            $_SESSION['customer_email'] = $customer_email;
-
-            $get_customer = "select * from customers where customer_email='$customer_email'";
-
-            $run_customer = mysqli_query($conn, $get_customer);
-
-            $row_customer = mysqli_fetch_array($run_customer);
-
-            $customer_id = $row_customer['customer_id'];
-
-            /* echo "<script>alert('Đăng Nhập Thành Công.')</script>"; */
-
-            echo "<script>window.open('../order.php?customer_id=$customer_id','_self')</script>";
-        }
-
-
-    }
-
+}
+$query = mysqli_query($conn,"SELECT * FROM customers WHERE reset_link_token ='".$token."' and customer_email ='".$emailId."'");
+$row = mysqli_num_rows($query);
+if($row){
+mysqli_query($conn,"UPDATE customers SET  customer_password='" . $customer_password . "', reset_link_token='" . NULL . "' WHERE customer_email='" . $emailId . "'");
+echo "<script>alert('Thanh cong')</script>";
+}else{
+echo "<script>alert('That bai roi')</script>";
+}
+}
 ?>

@@ -114,16 +114,18 @@
                             <td> 
                                 <?php 
 
-                                    if ($order_status=='Pending'){
+                                  if ($order_status=="0") {
 
-                                        echo $order_status='Đang Chờ Xử Lý';
+                                    $order_status = 'Chưa';
 
-                                    } else {
+                                  }else if ($order_status=="1") {
 
-                                        echo $order_status='Hoàn Thành';
+                                    $order_status = 'Không thành công';
 
-                                    }
-
+                                  }else{
+                                    $order_status = 'Đã thanh toán';
+                                  }
+                                  echo $order_status;
                                 ?> 
                             </td>
                             

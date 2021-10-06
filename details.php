@@ -54,13 +54,10 @@ if (isset($_GET['product_id'])) {
 
         $product_rated = $row_product['Rate'];
     //comment
-        if($row_product==null){
+        if($row_product==0 ){
             echo "<script>window.open('404error.php','_self')</script>";
         }
 
-}
-else{
-    echo "<script>window.open('404error.php','_self')</script>";
 }
 if(isset($_SESSION['customer_email'])){
     $session_email = $_SESSION['customer_email'];
@@ -584,17 +581,15 @@ if(isset($_SESSION['customer_email'])){
                 <div class="link-column">
                     <ul>
                         <li><span>Website</span></li>
-                        <li><a href="/websites">Trang chủ</a></li>
-                        <li><a href="/email">Cửa hàng</a></li>
-                        <li><a href="/status">Liên hệ</a></li>
-                        <li><a href="/security">Giỏ hàng</a></li>
+                        <li><a href="index.php">Trang chủ</a></li>
+                        <li><a href="shop.php">Cửa hàng</a></li>
+                        <li><a href="cart.php">Giỏ hàng</a></li>
+                        <li><a href="contacts.php">Liên hệ</a></li>
                     </ul>
                     <ul>
                         <li><span>Resources</span></li>
                         <li>
-                        <a href="/knowledge-base" rel="noopener noreferrer"
-                            >Knowledge Base</a
-                        >
+                        <a href="/knowledge-base" rel="noopener noreferrer">Knowledge Base</a>
                         </li>
                         <li>
                         <a href="/api-documentation" rel="noopener noreferrer"
@@ -617,13 +612,13 @@ if(isset($_SESSION['customer_email'])){
             </div>
             <div class="social-row">
                 <div class="copyright-column">
-                <p>&copy; 2021 Some Company, Inc. All rights reserved.</p>
+                <p>&copy; 2021 SpriteGame, Inc. All rights reserved.</p>
                 </div>
                 <div class="social-column">
-                <a href="your-instagram" target="_blank" rel="noopener noreferrer">Tiktok</a>
-                <a href="your-twitter" target="_blank" rel="noopener noreferrer">Twitter</a>
-                <a href="your-facebook-account" target="_blank" rel="noopener noreferrer">Facebook</a>
-                <a href="your-youtube" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">Tiktok</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
                 </div>
             </div>
         </section>

@@ -38,7 +38,7 @@
 
     $ip_add = getRealIpUser();
 
-    $status = "Pending";
+    $status = "0";
 
     $get_cart = "select * from cart where ip_add='$ip_add'";
 

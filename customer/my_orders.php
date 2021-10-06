@@ -45,14 +45,16 @@
 
                 $order_status = $row_orders['order_status'];
 
-                if ($order_status=="Pending") {
+                if ($order_status=="0") {
 
                     $order_status = 'Chưa';
 
-                } else {
+                }else if ($order_status=="1") {
 
-                    $order_status = 'Đã xong';
+                    $order_status = 'Không thành công';
 
+                }else{
+                    $order_status = 'Đã thanh toán';
                 }
 
                 $get_products = "select * from products where product_id='$product_id'";
@@ -65,6 +67,7 @@
 
                     $product_image_1 = $row_products['product_image_1'];
 
+                    $link_url = $row_products['linkURL'];
         
         ?>
             <tr>
@@ -74,9 +77,10 @@
                 <td><?php echo $order_date; ?></td>
                 <td><?php echo $order_status; ?></td>
                 <td>
-                <a href="../payment?product_id=<?php echo $product_id; ?>">
-                    <button class="button">Thanh toán</button>
-                </a>
+                <?php if($order_status != 'Đã thanh toán')
+                        echo '<a href="../payment/index.php?product_id='.$product_id.'&order_id='.$order_id.'&order_pass='.'1655'.date("YmdHis").'"><button class="button">Thanh toán</button></a>';
+                    else  
+                        echo '<a href="'.$link_url.'"><button class="button">Tải về</button></a>';?>
                 </td>
             </tr>
 

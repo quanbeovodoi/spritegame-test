@@ -141,7 +141,7 @@ if (isset($_SESSION['customer_email'])) {
     </tbody>
     </table>
     </div>';
-	echo smtp_mailer('quanbeovodoi@gmail.com','Cảm ơn vì đã mua sản phẩm',$html);
+	smtp_mailer($session_email,'Cảm ơn vì đã mua sản phẩm',$html);
 	
 }else{
 	echo "<script>window.open('../customer/login.php','self')</script>";

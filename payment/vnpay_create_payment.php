@@ -16,7 +16,15 @@ if (!isset($_SESSION['customer_email'])) {
     echo "<script>window.open('../customer/login.php','self')</script>";
     
 } else {
-if (isset($_GET['product_id'])) {
+if (isset($_GET['product_id']) && $_GET['order_id'] && $_GET['order_pass']) {
+
+    $customer_email = $_SESSION['customer_email'];
+
+    $order_id = $_GET['order_id'];
+    $get_customer_order = "select * from customer_orders where order_id= '$order_id'";
+    $run_customer_order = mysqli_query($conn, $get_customer_order);
+    $row_customer_order = mysqli_fetch_array($run_customer_order);
+    $cus_id = $row_customer_order['customer_id'];
 
     $product_id = $_GET['product_id'];
 
@@ -43,15 +51,27 @@ if (isset($_GET['product_id'])) {
         $product_sale = $row_product['product_sale'];
 
         $product_rated = $row_product['Rate'];
-
-}
-$vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        // $checkstate = mysqli_query($conn,"SELECT * FROM customer_orders WHERE order_status = 1 AND order_id= '$order_id' AND product_id = '$product_id' AND customer_id = '$cus_id'");
+        // $rowcount=mysqli_num_rows($checkstate);
+        // if($rowcount == 0){
+            $updateState_pro = mysqli_query($conn,"UPDATE customer_orders SET order_status = 1 WHERE order_id= '$order_id' AND product_id = '$product_id' AND customer_id = '$cus_id'"); 
+        //     $const = date("YmdHis");
+        // }else{
+        //     die('');
+        // }
+        $order_pass = date("YmdHis");
+        $updateOrderPass_pro = mysqli_query($conn,"UPDATE customer_orders SET order_pass = $order_pass WHERE order_id= '$order_id' AND product_id = '$product_id' AND customer_id = '$cus_id'"); 
+        $getorderPass = mysqli_query($conn,"SELECT * FROM customer_orders WHERE order_id= '$order_id' AND product_id = '$product_id' AND customer_id = '$cus_id'");
+        $row_orderPass = mysqli_fetch_array($getorderPass);
+    }
+$vnp_TxnRef = $row_orderPass['order_pass']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
 $vnp_OrderInfo = 'Thanh toan san pham '. $product_title;
 $vnp_OrderType = 'billpayment';
 $vnp_Amount = str_replace(',', '', $product_price*1000) * 100;
 $vnp_Locale = 'vn';
 $vnp_BankCode = $_POST['bank_code'];
 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
 
 $inputData = array(
     "vnp_Version" => "2.0.0",
@@ -91,6 +111,7 @@ if (isset($vnp_HashSecret)) {
    	$vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
     $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
 }
+
 $returnData = array('code' => '00'
     , 'message' => 'success'
     , 'data' => $vnp_Url);

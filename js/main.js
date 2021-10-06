@@ -1,6 +1,5 @@
 window.addEventListener("load", event => {
 
-
    // Fixed nav
 
    const nav = document.querySelector('nav'),

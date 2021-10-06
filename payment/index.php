@@ -37,8 +37,23 @@
     <body>
 
     <?php
-
+if(isset($_GET['order_id'])){
+    $order_id = $_GET['order_id'];
+    // $get_customer_order = "select * from customer_orders where order_id= '$order_id'";
+    // $run_customer_order = mysqli_query($conn, $get_customer_order);
+    // $row_customer_order = mysqli_fetch_array($run_customer_order);
+    // $cus_id = $row_customer_order['customer_id'];
+}
 if (isset($_GET['product_id'])) {
+    // $customer_email = $_SESSION['customer_email'];
+
+    // $get_customer = "select * from customers where customer_email= '$customer_email'";
+
+    // $run_customer = mysqli_query($conn, $get_customer);
+
+    // $row_customer = mysqli_fetch_array($run_customer);
+
+        // $cus_id = $row_customer['customer_id'];
 
     $product_id = $_GET['product_id'];
 
@@ -66,38 +81,26 @@ if (isset($_GET['product_id'])) {
 
         $product_rated = $row_product['Rate'];
 
+        $order_pass = $_GET['order_pass'];
+        $updateOrderPass_pro = mysqli_query($conn,"UPDATE customer_orders SET order_pass = $order_pass WHERE order_id= '$order_id'"); 
+        $getorderPass = mysqli_query($conn,"SELECT * FROM customer_orders WHERE order_id= '$order_id'");
+        $row_orderPass = mysqli_fetch_array($getorderPass);
+
 }
 ?>
         <div class="container">
             <div class="header clearfix">
-                <h3 class="text-muted">VNPAY DEMO</h3>
+                <h3 class="text-muted">VnPay</h3>
             </div>
-            <h3>Tạo mới đơn hàng</h3>
             <div class="table-responsive">
-                <form action="/SpritegameShop/payment/vnpay_create_payment.php?product_id=<?php echo $product_id; ?>" id="create_form" method="post">       
+                <form action="/SpritegameShop/payment/vnpay_create_payment.php?product_id=<?php echo $product_id; ?>&order_id=<?php echo $order_id; ?>&order_pass=<?php echo $row_orderPass['order_pass'];?>" id="create_form" method="post">       
 
-                    <div class="form-group">
-                        <label for="language">Loại hàng hóa </label>
-                        <select name="order_type" id="order_type" class="form-control">
-                            <option value="topup">Nạp tiền điện thoại</option>
-                            <option value="billpayment">Thanh toán hóa đơn</option>
-                            <option value="fashion">Thời trang</option>
-                            <option value="other">Khác - Xem thêm tại VNPAY</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="order_id">Mã hóa đơn</label>
-                        <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>"/>
-                    </div>
+                    <h1>Thanh toán hoá đơn</h1>
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
-                        <input class="form-control" id="amount"
-                               name="amount" type="number" value="<?php echo $product_price ?>"/>
+                        <input class="form-control" type="number" value="<?php echo $product_price ?>" disabled/>
                     </div>
-                    <div class="form-group">
-                        <label for="order_desc">Nội dung thanh toán</label>
-                        <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Noi dung thanh toan</textarea>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="bank_code">Ngân hàng</label>
                         <select name="bank_code" id="bank_code" class="form-control">
@@ -126,16 +129,7 @@ if (isset($_GET['product_id'])) {
                             <option value="VISA"> Thanh toan qua VISA/MASTER</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="language">Ngôn ngữ</label>
-                        <select name="language" id="language" class="form-control">
-                            <option value="vn">Tiếng Việt</option>
-                            <option value="en">English</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Popup</button>
-                    <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán Redirect</button>
+                    <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán</button>
 
                 </form>
             </div>
@@ -143,7 +137,7 @@ if (isset($_GET['product_id'])) {
                 &nbsp;
             </p>
             <footer class="footer">
-                <p>&copy; VNPAY 2015</p>
+                <p>&copy; Thanh toán VNPAY </p>
             </footer>
         </div>  
         <link href="https://sandbox.vnpayment.vn/paymentv2/lib/vnpay/vnpay.css" rel="stylesheet"/>
@@ -177,4 +171,5 @@ if (isset($_GET['product_id'])) {
 
     </body>
 </html>
-<?php }?>
+<?php
+}?>

@@ -8,17 +8,6 @@
 
 ?>
 
-<div class="row"><!-- row 1 begin -->
-    <div class="col-lg-12"><!-- col-lg-12 begin -->
-        <ol class="breadcrumb"><!-- breadcrumb begin -->
-            <li class="active">
-                
-                <i class="fa fa-dashboard"></i> Bảng điều khiển / Xem thể loại
-                
-            </li>
-        </ol><!-- breadcrumb finish -->
-    </div><!-- col-lg-12 finish -->
-</div><!-- row 1 finish -->
 
 <div class="row"><!-- row 2 begin -->
     <div class="col-lg-12"><!-- col-lg-12 begin -->

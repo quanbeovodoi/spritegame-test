@@ -24,7 +24,7 @@
     <!-- Right navbar links -->
    
   </nav>
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-blue elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -59,7 +59,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link <?php if(isset($_GET['view_products'])||isset($_GET['insert_products'])||isset($_GET['edit_product'])){echo"active";};?>">
-              <i class="nav-icon fas fa-tshirt"></i>
+              <i class="nav-icon fa fa-archive"></i>
               <p>
                 Sản Phẩm
                 <i class="fas fa-angle-left right"></i>
