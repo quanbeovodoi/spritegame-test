@@ -26,7 +26,7 @@ if(isset($_POST['password-reset-token']) && $_POST['customer_email'])
  
     $update = mysqli_query($conn,"UPDATE customers set reset_link_token='" . $token . "' ");
  
-    $link = "<a href='http://localhost/SpritegameShop/customer/reset-password.php?key=".$emailId."&token=".$token."'>Click To Reset password</a>";
+    $link = "<a href='http://spritegame.herokuapp.com/customer/reset-password.php?key=".$emailId."&token=".$token."'>Click To Reset password</a>";
  
     include('../mailsadooe/smtp/PHPMailerAutoload.php');
  
