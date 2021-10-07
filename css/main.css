@@ -1617,10 +1617,10 @@ button:focus {
     line-height: 60px;
     text-align: center;
     border-radius:  15px 15px 0 0;
-    background: rgb(8 109 109 / 90%);
+    background: rgb(120, 191, 216);;
 }
 .chatbot .wrapper .form{
-    background: rgba(220, 255, 243, 0.8);
+    background: rgb(210, 227, 233);
     padding: 20px 15px;
     min-height: 400px;
     max-height: 400px;

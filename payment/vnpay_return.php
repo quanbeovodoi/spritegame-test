@@ -286,7 +286,7 @@
                             </tbody>
                             </table>
                             </div>';
-                            echo smtp_mailer($session_email,'Cảm ơn vì đã mua sản phẩm',$html);
+                            smtp_mailer($session_email,'Cảm ơn vì đã mua sản phẩm',$html);
                             
                         }else{
                             echo "<script>window.open('../customer/login.php','self')</script>";

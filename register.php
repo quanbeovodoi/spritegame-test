@@ -306,7 +306,7 @@
     <tbody>
     <tr>
     <td width="30"></td>
-    <td align="left" valign="middle" style="padding:0;margin:0;font-size:0;line-height:0"><a href="http://discussdesk.com//" target="_blank"><img src="http://discussdesk.com//view/assets/images/logo.png" alt="discussdesk" ></a></td>
+    <td align="left" valign="middle" style="padding:0;margin:0;font-size:0;line-height:0"><a href="#" target="_blank"><img src="#" alt="discussdesk" ></a></td>
     <td width="30"></td>
     </tr>
     </tbody>
@@ -320,7 +320,7 @@
     <tr>
     <td colspan="3" height="60"></td></tr><tr><td width="25"></td>
     <td align="center">
-    <h1 style="font-family:HelveticaNeue-Light,arial,sans-serif;font-size:48px;color:#404040;line-height:48px;font-weight:bold;margin:0;padding:0">Cảm ơn quý khách đã mua sản phẩm</h1>
+    <h1 style="font-family:HelveticaNeue-Light,arial,sans-serif;font-size:48px;color:#404040;line-height:48px;font-weight:bold;margin:0;padding:0">Mã xác thực</h1>
     </td>
     <td width="25"></td>
     </tr>

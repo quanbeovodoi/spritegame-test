@@ -35,6 +35,7 @@ if (isset($_GET['product_id'])) {
     $run_product = mysqli_query($conn, $get_product);
 
     $row_product = mysqli_fetch_array($run_product);
+        $product_id = $row_product['product_id'];
 
         $product_title = $row_product['product_title'];
 
@@ -421,7 +422,14 @@ if(isset($_SESSION['customer_email'])){
                                 </div>
                             </div>
                             <!--Form-->
-                            <?php add_cart(); ?>
+
+                            <?php 
+                                $ip_add = getRealIpUser();
+                                $get_cart = "select * from cart where ip_add='$ip_add'AND product_id='$product_id'";
+                                $run_cart = mysqli_query($conn, $get_cart);
+                                $row_cart = mysqli_num_rows($run_cart);
+                                if($row_cart==0){add_cart();} 
+                            ?>
                             <form action="details.php?add_cart=<?php echo $product_id; ?>" method="post">
                         </div>
                     </div>

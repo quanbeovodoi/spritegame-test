@@ -36,6 +36,7 @@
 
     }
 
+
     $ip_add = getRealIpUser();
 
     $status = "0";
@@ -52,12 +53,42 @@
 
         $run_products = mysqli_query($conn, $get_products);
 
+        $session_email = $_SESSION['customer_email'];
+
+        $get_customer = "select * from customers where customer_email='$session_email'";
+
+        $run_customer = mysqli_query($conn, $get_customer);
+
+        $row_customer = mysqli_fetch_array($run_customer);
+
+            $customer_id = $row_customer['customer_id'];
+
+        $get_orders = "select * from customer_orders where customer_id='$customer_id' AND product_id='$product_id' order by 1 DESC";
+
+        $run_orders = mysqli_query($conn, $get_orders);
+
+        $row_orders = mysqli_num_rows($run_orders);
+
+        // while ($row_orders = mysqli_fetch_array($run_orders)) {
+
+        //     $order_id = $row_orders['order_id'];
+
+        //     $due_amount = $row_orders['due_amount'];
+
+        //     $product_id = $row_orders['product_id'];
+
+        //     $order_date = $row_orders['order_date'];
+
+        //     $order_status = $row_orders['order_status'];
+
+        // }
+
         while ($row_products = mysqli_fetch_array($run_products)) {
-
+            
             $sub_total = $row_products['product_price'];
-
-            $insert_customer_order = "insert into customer_orders (customer_id, due_amount, product_id, order_date, order_status)
-            values ('$customer_id','$sub_total', '$product_id', NOW(), '$status')";
+            if($row_orders == 0){
+                $insert_customer_order = "insert into customer_orders (customer_id, due_amount, product_id, order_date, order_status) values ('$customer_id','$sub_total', '$product_id', NOW(), '$status')";
+            }
 
             $run_customer_order = mysqli_query($conn, $insert_customer_order);
 
@@ -81,6 +112,9 @@
                 </div>
             </div>
             ";
+            // if($row_orders != 0){
+            //     echo "<script>alert('Có Sản phẩm đã được đặt hàng')</script>";
+            // }
         }
 
     }
