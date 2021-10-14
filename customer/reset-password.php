@@ -196,9 +196,10 @@ $query = mysqli_query($conn,"SELECT * FROM customers WHERE reset_link_token ='".
 $row = mysqli_num_rows($query);
 if($row){
 mysqli_query($conn,"UPDATE customers SET  customer_password='" . $customer_password . "', reset_link_token='" . NULL . "' WHERE customer_email='" . $emailId . "'");
-echo "<script>alert('Thanh cong')</script>";
+echo "<script>alert('Đã reset thành công')</script>";
+echo "<script>window.open('login.php','_self')</script>";
 }else{
-echo "<script>alert('That bai roi')</script>";
+echo "<script>alert('Thất bại! :(((')</script>";
 }
 }
 ?>

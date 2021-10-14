@@ -17,7 +17,7 @@ if(mysqli_num_rows($run_query) > 0){
     $replay = $fetch_data['replies'];
     echo $replay;
 }else{
-    echo "Bạn có thể viết lại được không!? :)))";
+    echo "SpriteGame web cung cấp tài nguyên làm game tại Việt Nam";
 }
 
 ?>

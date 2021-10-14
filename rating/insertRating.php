@@ -48,6 +48,6 @@ if (isset($_POST["index"], $_POST["product_id"])) {
         $numberrate = (int)$math_rate['rateRow'];
         $updatedRatePro = "UPDATE products SET Rate ='" . (int)$numberrate . "' WHERE product_id = '" . $productId . "'";
         mysqli_query($conn, $updatedRatePro);
-        echo "Cập nhật đánh giá Thành Công";
+        echo "Cập nhật";
     }
 }

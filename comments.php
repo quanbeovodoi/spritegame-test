@@ -13,8 +13,19 @@
         $getPrdId = mysqli_real_escape_string($conn, $_POST['product_id']);
         $insert_product = "INSERT INTO `comments` ( `product_id`, `id_cus`, `comment`) VALUES ('$getPrdId', '$cus_id', '$getMesg');";
         $run_query = mysqli_query($conn, $insert_product) or die("Error");
+        $comment_id = mysqli_insert_id($conn);
+        // echo "New record created successfully. Last inserted ID is: " . $comment_id;
+
+        //like_insert
+         //$run_comment = mysqli_query($conn, $get_comment);
+        // $insert_likecomment_1 = "INSERT INTO likecomments(id_comments,type_like,number_like) VALUES ('$comment_id','0','0');";
+        // $insert_likecomment_2 = "INSERT INTO likecomments(id_comments,type_like,number_like) VALUES ('$comment_id','1','0');";
+        // $insert_likecomment_3 = "INSERT INTO likecomments(id_comments,type_like,number_like) VALUES ('$comment_id','2','0');";
+        // $run_insert_likecomment_1 = mysqli_query($conn, $insert_likecomment_1) or die("Error");
+        // $run_insert_likecomment_2 = mysqli_query($conn, $insert_likecomment_2) or die("Error");
+        // $run_insert_likecomment_3 = mysqli_query($conn, $insert_likecomment_3) or die("Error");
         if($run_query){
-            echo $getMesg;
+            echo $comment_id.','.$getMesg;
         }
     }else{
         echo "Hãy đăng nhập để bình luận! ";

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/swiper.min.css">
     <!--css-->
     <link rel="stylesheet" href="css/details.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <!-- php get product your chose -->
@@ -150,6 +151,8 @@ if(isset($_SESSION['customer_email'])){
 
                     $row_customer = mysqli_fetch_array($run_customer);
 
+                        $customer_id = $row_customer['customer_id'];
+
                         $customer_name = $row_customer['customer_name'];
 
                         $customer_image = $row_customer['customer_image'];
@@ -277,8 +280,7 @@ if(isset($_SESSION['customer_email'])){
                                     <span class="caption-m10-w12 gray-06"></span>
                                 </div>
                                 <div class="section-card__header--right primary-tap-blue">
-                                    <a data-v-19663232="" href="/app/224158/review" class="tap-router caption-m12-w14 flex-center--y"> Show
-                                        All </a>
+                                    <span class="material-icons">stars</span>
                                 </div>
                             </header>
                             <main class="section-card__body">
@@ -447,7 +449,7 @@ if(isset($_SESSION['customer_email'])){
         <div class="d-flex align-items-center justify-content-center">
             <div class="cmt">
                 <div class="form">
-                    <div class="bot-inbox inbox">
+                    <div class="commentBox">
                         <h3 class="TitleCmt row justify-content-center mb-4">Bình luận</h3>
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
@@ -530,6 +532,7 @@ if(isset($_SESSION['customer_email'])){
                                         $get_comment = "select * from comments where product_id = '$product_id' order by id DESC";
                                         $run_comment = mysqli_query($conn, $get_comment);
                                         while ($row_comment = mysqli_fetch_array($run_comment)){
+                                        $comment_id = $row_comment['id'];
                                         $cus_id = $row_comment['id_cus'];
                                         $cus_comment = $row_comment['comment'];
                                         $date_comment = $row_comment['date'];
@@ -538,6 +541,50 @@ if(isset($_SESSION['customer_email'])){
                                         $row_customer = mysqli_fetch_array($run_customer);
                                         $customer_name = $row_customer['customer_name'];
                                         $customer_image = $row_customer['customer_image'];
+                                        // comment-number
+                                        //$get_likecomment_1 = "SELECT * FROM likecomments WHERE id_comments = '$comment_id' AND 	type_like = 0";
+                                        // $get_likecomment_2 = "SELECT * FROM likecomments WHERE id_comments = '$comment_id' AND 	type_like = 1";
+                                        // $get_likecomment_3 = "SELECT * FROM likecomments WHERE id_comments = '$comment_id' AND 	type_like = 2";
+                                        // $run_get_likecomment_1 = mysqli_query($conn, $get_likecomment_1) or die("Error");
+                                        // $run_get_likecomment_2 = mysqli_query($conn, $get_likecomment_2) or die("Error");
+                                        // $run_get_likecomment_3 = mysqli_query($conn, $get_likecomment_3) or die("Error");
+                                        // $row_likecomment_1 = mysqli_fetch_array($run_get_likecomment_1);
+                                        // $row_likecomment_2 = mysqli_fetch_array($run_get_likecomment_2);
+                                        // $row_likecomment_3 = mysqli_fetch_array($run_get_likecomment_3);
+                                        // $like = $row_likecomment_1['number_like'];
+                                        // $heart = $row_likecomment_2['number_like'];
+                                        // $haha = $row_likecomment_3['number_like'];
+
+                                        //count-comment
+                                        $count_likecomment_1 = "SELECT SUM(number_like) AS Numberlike FROM likecomments WHERE id_comments='$comment_id' AND type_like = 0";
+                                        $run_count_likecomment_1 = mysqli_query($conn, $count_likecomment_1);
+                                        $row_count_likecomment_1 = mysqli_fetch_array($run_count_likecomment_1);
+                                        if($row_count_likecomment_1['Numberlike']==''&&$row_count_likecomment_1['Numberlike']==NULL)
+                                        {
+                                            $count_likecomment_number_1 = 0;
+                                        }else{
+                                            $count_likecomment_number_1 = $row_count_likecomment_1['Numberlike'];
+                                        }
+
+                                        $count_likecomment_2 = "SELECT SUM(number_like) AS Numberlike FROM likecomments WHERE id_comments='$comment_id' AND type_like = 1";
+                                        $run_count_likecomment_2 = mysqli_query($conn, $count_likecomment_2);
+                                        $row_count_likecomment_2 = mysqli_fetch_array($run_count_likecomment_2);
+                                        if($row_count_likecomment_2['Numberlike']==''&&$$row_count_likecomment_2['Numberlike']==NULL)
+                                        {
+                                            $count_likecomment_number_2 = 0;
+                                        }else{
+                                            $count_likecomment_number_2 = $row_count_likecomment_2['Numberlike'];
+                                        }
+
+                                        $count_likecomment_3 = "SELECT SUM(number_like) AS Numberlike FROM likecomments WHERE id_comments='$comment_id' AND type_like = 2";
+                                        $run_count_likecomment_3 = mysqli_query($conn, $count_likecomment_3);
+                                        $row_count_likecomment_3 = mysqli_fetch_array($run_count_likecomment_3);
+                                        if($row_count_likecomment_3['Numberlike']==''&&$row_count_likecomment_3['Numberlike']==NULL)
+                                        {
+                                            $count_likecomment_number_3 = 0;
+                                        }else{
+                                            $count_likecomment_number_3 = $row_count_likecomment_3['Numberlike'];
+                                        }
                                     ?>
                                     <div class="comment d-flex  mb-4">
                                         <div class="flex-shrink-0">
@@ -557,9 +604,97 @@ if(isset($_SESSION['customer_email'])){
                                             </div>
                                             <div class="comment-body">
                                                 <?php echo $cus_comment ?>
+                                                <div class="like-show">
+                                                    <i class="textlike like-btn material-icons"></i>
+                                                </div>
+                                            </div>
+                                            <div class="like-des btn-like">
+                                                <div class="btn-like-title"> <span>Thích</span></div>
+                                                <div class="number-like" id="number-like-<?php echo $comment_id ?>">
+                                                    <span id="span-1<?php echo $comment_id ?>"><?php echo $count_likecomment_number_1 ?></span><i class="like-btn material-icons disable-select">thumb_up</i>
+                                                    <span id="span-2<?php echo $comment_id ?>"><?php echo $count_likecomment_number_2 ?></span><i class="like-btn material-icons disable-select">favorite</i>
+                                                    <span id="span-3<?php echo $comment_id ?>"><?php echo $count_likecomment_number_3 ?></span><i class="like-btn material-icons disable-select">sentiment_very_satisfied</i>
+                                                </div>
+                                                <div class="area-like">
+                                                    <div class="like-container">
+                                                        <button class="like-cnt" id="like-cnt-<?php echo $comment_id ?>" type="button" value="0">
+                                                            <i class="like-btn material-icons disable-select">thumb_up</i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="like-container">
+                                                        <button class="heart-cnt" id="heart-cnt-<?php echo $comment_id ?>" type="button" value="1">
+                                                            <i class="heart-btn like-btn material-icons disable-select">favorite</i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="like-container">
+                                                        <button class="haha-cnt" id="haha-cnt-<?php echo $comment_id ?>" type="button" value="2">
+                                                            <i class="haha-btn like-btn material-icons disable-select">sentiment_very_satisfied</i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <script>
+                                        $(document).ready(function(){
+                                            $("#like-cnt-<?php echo $comment_id ?>").on("click", function(){
+                                                $value = $(this).val();
+                                                $msg =  $value;
+                                                // alert($msg);
+                                                    if($value != null && $value != '' ){
+                                                        $.ajax({
+                                                        url: 'likecomments.php',
+                                                        type: 'POST',
+                                                        data: {text: $value,comment_id: <?php echo $comment_id ;?>,customer_id:<?php echo $cus_id;?>},
+                                                        success: function(result){
+                                                            const $replay = result.split(',');
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-1<?php echo $comment_id ;?>").html($replay[0]);
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-2<?php echo $comment_id ;?>").html($replay[1]);
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-3<?php echo $comment_id ;?>").html($replay[2]);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                            
+                                            $("#heart-cnt-<?php echo $comment_id ?>").on("click", function(){
+                                                $value = $(this).val();
+                                                $msg =  $value;
+                                                // alert($msg);
+                                                    if($value != null && $value != '' ){
+                                                        $.ajax({
+                                                        url: 'likecomments.php',
+                                                        type: 'POST',
+                                                        data: {text: $value,comment_id: <?php echo $comment_id ;?>,customer_id:<?php echo $cus_id;?>},
+                                                        success: function(result){
+                                                            const $replay = result.split(',');
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-1<?php echo $comment_id ;?>").html($replay[0]);
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-2<?php echo $comment_id ;?>").html($replay[1]);
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-3<?php echo $comment_id ;?>").html($replay[2]);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                            $("#haha-cnt-<?php echo $comment_id ?>").on("click", function(){
+                                                $value = $(this).val();
+                                                $msg =  $value;
+                                                // alert($msg);
+                                                    if($value != null && $value != '' ){
+                                                        $.ajax({
+                                                        url: 'likecomments.php',
+                                                        type: 'POST',
+                                                        data: {text: $value,comment_id: <?php echo $comment_id ;?>,customer_id:<?php echo $cus_id;?>},
+                                                        success: function(result){
+                                                            const $replay = result.split(',');
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-1<?php echo $comment_id ;?>").html($replay[0]);
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-2<?php echo $comment_id ;?>").html($replay[1]);
+                                                            $("#number-like-<?php echo $comment_id ;?> #span-3<?php echo $comment_id ;?>").html($replay[2]);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    </script>
                                     <?php }?>
                                     
                                 </div>
@@ -579,6 +714,92 @@ if(isset($_SESSION['customer_email'])){
         <!-- end comment -->
         
     </div>
+    <div class="testQ">
+        <?php
+            // $count_likecomment = "SELECT SUM(number_like) AS Numberlike FROM likecomments WHERE id_comments=71 GROUP BY type_like";
+            // $run_count_likecomment = mysqli_query($conn, $count_likecomment);
+            // while ($row_count_likecomment = mysqli_fetch_array($run_count_likecomment)){
+            // echo 'gia tri'. $row_count_likecomment['Numberlike'];
+            // }
+         ?>
+    </div>
+    <div class="product-other">
+        <div class="cards">
+            <!--card-->
+            <!-- php get product -->
+            <?php 
+
+                $get_products_cards = "select * from products order by RAND() DESC LIMIT 0, 4";
+
+                $run_products_cards = mysqli_query($conn, $get_products_cards);
+
+                while ($row_products_cards = mysqli_fetch_array($run_products_cards)) {
+
+                    $product_id_cards = $row_products_cards['product_id'];
+
+                    $product_title_cards = $row_products_cards['product_title'];
+
+                    $product_price_cards = $row_products_cards['product_price'];
+
+                    $product_image_1_cards = $row_products_cards['product_image_1'];
+
+                    $product_label_cards = $row_products_cards['product_label'];
+
+                    $product_sale_cards = $row_products_cards['product_sale'];
+
+            
+            ?>
+            <a href="details.php?product_id=<?php echo $product_id_cards; ?>" rel="noopenner" class="card">
+                <?php
+                    
+                    if ($product_label_cards == "new") {
+
+                        echo "<div class='new'>mới!</div>";
+
+                    } else {
+
+                        echo "<div class='sale'>giảm giá!</div>";
+
+                    }
+
+                ?>
+                <div class="card__image">
+                    <img src="admin/<?php echo $product_image_1_cards; ?>" alt="">
+                </div>
+
+                <div class="card__content">
+                    <article class="card__text">
+                        <h2 class="card__title"><?php echo $product_title_cards; ?></h2>
+                        <div class="card__price">
+                            <?php
+                            
+                                if ($product_label_cards == "sale") {
+
+                                    echo "
+                                        <p class='card__priceFinal'>$product_sale_cards ₫</p>
+                                        <p class='card__priceOriginal'>$product_price_cards  ₫</p>
+                                    ";
+                                } else {
+
+                                    echo "<p class='card__priceFinal'>$product_price_cards  ₫</p>";
+
+                                }
+
+                            ?>
+                        </div>
+                    </article>
+
+                    <div class="card__icon">
+                        <p class="card__detail">Chi tiết<span>+</span></p>
+                        <button class="btn"><span>Xem</span></button>
+                    </div>
+                </div>
+            </a>
+            <?php } ?>
+            <!-- end php get product -->
+            <!--end Card-->
+        </div>
+    </div>
     <div class="footerQ">
         <section class="footer">
             <div class="link-row">
@@ -597,12 +818,10 @@ if(isset($_SESSION['customer_email'])){
                     <ul>
                         <li><span>Resources</span></li>
                         <li>
-                        <a href="/knowledge-base" rel="noopener noreferrer">Knowledge Base</a>
+                            <a href="/knowledge-base" rel="noopener noreferrer">Knowledge Base</a>
                         </li>
                         <li>
-                        <a href="/api-documentation" rel="noopener noreferrer"
-                            >API Documentation</a
-                        >
+                            <a href="/api-documentation" rel="noopener noreferrer">API Documentation</a>
                         </li>
                         <li>
                             <a href="/developers" rel="noopener noreferrer">Developers</a>
@@ -671,18 +890,198 @@ if(isset($_SESSION['customer_email'])){
                         type: 'POST',
                         data: {text: $value,product_id: <?php echo $product_id?>},
                         success: function(result){
-                            $replay = '<div class="comment d-flex  mb-4"><div class="flex-shrink-0"><div class="avatar avatar-sm rounded-circle"><img class="avatar-img" src="' + $img + '" alt=""></div></div><div class="flex-shrink-1 ms-2 ms-sm-3"><div class="comment-meta d-flex"><h6 class="me-2"><?php if(isset($_SESSION['customer_email'])){echo $customer_name;}else{echo 'Người dùng';} ?></h6><span class="text-muted">Mới</span></div><div class="comment-body">'+ result +'</div></div></div>';
-                            $(".form .msg-header .comments").prepend($replay);
+                            const arr = result.split(',');
+                            // console.log(arr);
+                            $replay = '<div class="comment d-flex  mb-4"><div class="flex-shrink-0"><div class="avatar avatar-sm rounded-circle"><img class="avatar-img" src="' + $img + '" alt=""></div></div><div class="flex-shrink-1 ms-2 ms-sm-3"><div class="comment-meta d-flex"><h6 class="me-2"><?php if(isset($_SESSION['customer_email'])){echo $customer_name;}else{echo 'Người dùng';} ?></h6><span class="text-muted">Mới</span></div><div class="comment-body">'+ arr[1] +'<div class="like-show"><i class="textlike like-btn material-icons"></i></div></div>';
+                            $like_result = `<div class="like-des btn-like">
+                                                <div class="btn-like-title"> <span>Thích</span></div>
+                                                <div class="number-like" id="number-like-`+ arr[0] +`">
+                                                    <span id="span-1`+ arr[0] +`">0</span><i class="like-btn material-icons disable-select">thumb_up</i>
+                                                    <span id="span-2`+ arr[0] +`">0</span><i class="like-btn material-icons disable-select">favorite</i>
+                                                    <span id="span-3`+ arr[0] +`">0</span><i class="like-btn material-icons disable-select">sentiment_very_satisfied</i>
+                                                </div>
+                                                <div class="area-like">
+                                                    <div class="like-container">
+                                                        <button class="like-cnt" id="like-cnt-`+ arr[0] +`" type="button" value="0">
+                                                            <i class="like-btn material-icons disable-select">thumb_up</i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="like-container">
+                                                        <button class="heart-cnt" id="heart-cnt-`+ arr[0] +`" type="button" value="1">
+                                                            <i class="heart-btn like-btn material-icons disable-select">favorite</i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="like-container">
+                                                        <button class="haha-cnt" id="haha-cnt-`+ arr[0] +`" type="button" value="2">
+                                                            <i class="haha-btn like-btn material-icons disable-select">sentiment_very_satisfied</i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            `
+                            $(".form .msg-header .comments").prepend($replay + $like_result);
+                            $("#like-cnt-"+arr[0]).on("click", function(){
+                                $value = $(this).val();
+                                $msg =  $value;
+                                // alert($msg);
+                                    if($value != null && $value != '' ){
+                                        $.ajax({
+                                        url: 'likecomments.php',
+                                        type: 'POST',
+                                        data: {text: $value,comment_id:arr[0],customer_id:<?php echo $customer_id;?>},
+                                        success: function(result){
+                                            const $replay = result.split(',');
+                                            // console.log($replay);
+                                            $("#number-like-"+arr[0]+" #span-1"+arr[0]).html($replay[0]);
+                                            $("#number-like-"+arr[0]+" #span-2"+arr[0]).html($replay[1]);
+                                            $("#number-like-"+arr[0]+" #span-3"+arr[0]).html($replay[2]);
+                                        }
+                                    });
+                                }
+                            });
+                            
+                            $("#heart-cnt-"+arr[0]).on("click", function(){
+                                $value = $(this).val();
+                                $msg =  $value;
+                                // alert($msg);
+                                    if($value != null && $value != '' ){
+                                        $.ajax({
+                                        url: 'likecomments.php',
+                                        type: 'POST',
+                                        data: {text: $value,comment_id:arr[0],customer_id:<?php echo $customer_id;?>},
+                                        success: function(result){
+                                            const $replay = result.split(',');
+                                            // console.log($replay);
+                                            $("#number-like-"+arr[0]+" #span-1"+arr[0]).html($replay[0]);
+                                            $("#number-like-"+arr[0]+" #span-2"+arr[0]).html($replay[1]);
+                                            $("#number-like-"+arr[0]+" #span-3"+arr[0]).html($replay[2]);
+                                        }
+                                    });
+                                }
+                            });
+                            $("#haha-cnt-"+arr[0]).on("click", function(){
+                                $value = $(this).val();
+                                $msg =  $value;
+                                // alert($msg);
+                                    if($value != null && $value != '' ){
+                                        $.ajax({
+                                        url: 'likecomments.php',
+                                        type: 'POST',
+                                        data: {text: $value,comment_id: arr[0],customer_id:<?php echo $customer_id;?>},
+                                        success: function(result){
+                                            const $replay = result.split(',');
+                                            // console.log($replay);
+                                            $("#number-like-"+arr[0]+" #span-1"+arr[0]).html($replay[0]);
+                                            $("#number-like-"+arr[0]+" #span-2"+arr[0]).html($replay[1]);
+                                            $("#number-like-"+arr[0]+" #span-3"+arr[0]).html($replay[2]);
+                                        }
+                                    });
+                                }
+                            });
+                            myFunction();
                         }
                     });
                 }
             });
         });
+        
     </script>
 
 </body>
 </html>
 <script type="text/javascript">
+function myFunction() {
+   let likeBtn = document.querySelectorAll('.btn-like');
+    let btn_like_title = document.querySelectorAll('.btn-like-title');
+    btn_like_title = Array.from(btn_like_title);
+    likeBtn = Array.from(likeBtn);
+
+    for (let i = 0; i < likeBtn.length; i++) {
+        likeBtn[i].addEventListener('click',()=>{
+            if(likeBtn[i].classList.contains('checked')){
+                likeBtn[i].classList.remove('checked');
+            }else{
+                for (let i = 0; i < likeBtn.length; i++){
+                    if(likeBtn[i].classList.contains('checked')){
+                        likeBtn[i].classList.remove('checked');
+                    }
+                }
+                likeBtn[i].classList.add('checked');
+            }
+      });
+    }
+// like cnt 
+    let like_cnt = document.querySelectorAll('.like-cnt');
+    let textlike = document.querySelectorAll('.textlike.like-btn');
+    like_cnt = Array.from(like_cnt);
+    textlike = Array.from(textlike);
+    // console.log(textlike)
+    for (let i = 0; i < like_cnt.length; i++) {
+        like_cnt[i].addEventListener('click',()=>{
+            if(textlike[i].outerText == 'favorite')
+            {
+                textlike[i].innerHTML = 'thumb_up';
+            }
+            else if(textlike[i].outerText == 'sentiment_very_satisfied')
+            {
+                textlike[i].innerHTML = 'thumb_up';
+            }
+            else if(textlike[i].childNodes.length>=1){
+                textlike[i].innerHTML = '';
+            }
+            else{
+                textlike[i].innerHTML = 'thumb_up';
+            }
+      });
+    }
+//hert cnt
+    let heart_cnt = document.querySelectorAll('.heart-cnt');
+    heart_cnt = Array.from(heart_cnt);
+    for (let i = 0; i < heart_cnt.length; i++) {
+        heart_cnt[i].addEventListener('click',()=>{
+            if(textlike[i].outerText == 'thumb_up')
+            {
+                textlike[i].innerHTML = 'favorite';
+            }
+            else if(textlike[i].outerText == 'sentiment_very_satisfied')
+            {
+                textlike[i].innerHTML = 'favorite';
+            }
+            else if(textlike[i].childNodes.length>=1){
+                textlike[i].innerHTML = '';
+            }
+            else{
+                textlike[i].innerHTML = 'favorite';
+            }
+    });
+    }
+
+//haha
+let haha_cnt = document.querySelectorAll('.haha-cnt');
+haha_cnt = Array.from(haha_cnt);
+for (let i = 0; i < haha_cnt.length; i++) {
+    haha_cnt[i].addEventListener('click',()=>{
+        if(textlike[i].outerText == 'thumb_up')
+        {
+            textlike[i].innerHTML = 'sentiment_very_satisfied';
+        }
+        else if(textlike[i].outerText == 'favorite')
+        {
+            textlike[i].innerHTML = 'sentiment_very_satisfied';
+        }
+        else if(textlike[i].childNodes.length>=1){
+            textlike[i].innerHTML = '';
+        }
+        else{
+            textlike[i].innerHTML = 'sentiment_very_satisfied';
+        }
+});
+}
+
+}
 function showRestaurantData(url)
 {
     var xhttp = new XMLHttpRequest();
@@ -754,4 +1153,19 @@ function addRating (restaurantId, ratingValue) {
         var parameters = "index=" + ratingValue + "&product_id=" + restaurantId;
         xhttp.send(parameters);
 }
+myFunction();
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

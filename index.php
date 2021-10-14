@@ -4,7 +4,6 @@
     session_start();
     include("includes/db.php");
     include("functions/functions.php");
-
 ?>
 
 <?php error_reporting(0);?>
@@ -220,22 +219,91 @@
 
     </div>
     <!--end Swiper-->
-
+    
     <!--Card-->
     <section class="wrapperCard">
         <h3 class="section__title">SpriteGame</h3>
-        <h2 style="
-            background:#f7f8fc;
-            width:fit-content;
-            margin:0 auto;
-            text-align: center;
-            line-height: normal;
-            text-transform: uppercase;
-            color: #58a6b7;
-            font-weight: 900;
-            padding:10px 15px 5px 15px;
-            border-radius:30px 30px 0px 0px;
-        ">Sản phẩm gần đây</h2>
+        <!-- card-cate -->
+        <div class="product-other">
+            <h2 class="wrapperCard__title">Sản phẩm nổi bật</h2>
+            <div class="cards">
+                <!--card-->
+                <!-- php get product -->
+                <?php 
+
+                    $get_products_cards = "SELECT * FROM products ORDER BY Rate DESC LIMIT 0, 4";
+
+                    $run_products_cards = mysqli_query($conn, $get_products_cards);
+
+                    while ($row_products_cards = mysqli_fetch_array($run_products_cards)) {
+
+                        $product_id_cards = $row_products_cards['product_id'];
+
+                        $product_title_cards = $row_products_cards['product_title'];
+
+                        $product_price_cards = $row_products_cards['product_price'];
+
+                        $product_image_1_cards = $row_products_cards['product_image_1'];
+
+                        $product_label_cards = $row_products_cards['product_label'];
+
+                        $product_sale_cards = $row_products_cards['product_sale'];
+
+                
+                ?>
+                <a href="details.php?product_id=<?php echo $product_id_cards; ?>" rel="noopenner" class="card">
+                    <?php
+                        
+                        if ($product_label_cards == "new") {
+
+                            echo "<div class='new'>mới!</div>";
+
+                        } else {
+
+                            echo "<div class='sale'>giảm giá!</div>";
+
+                        }
+
+                    ?>
+                    <div class="card__image">
+                        <img src="admin/<?php echo $product_image_1_cards; ?>" alt="">
+                    </div>
+
+                    <div class="card__content">
+                        <article class="card__text">
+                            <h2 class="card__title"><?php echo $product_title_cards; ?></h2>
+                            <div class="card__price">
+                                <?php
+                                
+                                    if ($product_label_cards == "sale") {
+
+                                        echo "
+                                            <p class='card__priceFinal'>$product_sale_cards ₫</p>
+                                            <p class='card__priceOriginal'>$product_price_cards  ₫</p>
+                                        ";
+                                    } else {
+
+                                        echo "<p class='card__priceFinal'>$product_price_cards  ₫</p>";
+
+                                    }
+
+                                ?>
+                            </div>
+                        </article>
+
+                        <div class="card__icon">
+                            <p class="card__detail">Chi tiết<span>+</span></p>
+                            <button class="btn"><span>Xem</span></button>
+                        </div>
+                    </div>
+                </a>
+                <?php } ?>
+                <!-- end php get product -->
+                <!--end Card-->
+            </div>
+        </div>
+    <!-- end card-cate -->
+        <h2 class="wrapperCard__title">Sản phẩm gần đây</h2>
         <div class="cards">
             <!--card-->
             <!-- php get product -->
@@ -330,7 +398,7 @@
                                 <i class="fas fa-user"></i>
                             </div>
                             <div class="msg-header">
-                                <p>Chào bạn mình có thể giúp gì cho bạn!</p>
+                                <p>Sprite Game web cung cấp tai nguyên làm game tại Việt Nam</p>
                             </div>
                         </div>
                     </div>

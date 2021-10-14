@@ -3,6 +3,11 @@
     session_start();
     include("../includes/db.php");
     include("../functions/functions.php");
+    if (isset($_SESSION['customer_email'])) {
+
+        echo "<script>window.open('../index.php','_self')</script>";
+        
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,9 +30,9 @@
         <div class="menu-items">
             <a href="../index.php" class="menu-link">Trang chủ</a>
             <a href="../shop.php" class="menu-link">Cửa hàng</a>
-            <a href="../register.php" class="menu-link">Tài khoản</a>
+            <a href="login.php" class="menu-link">Tài khoản</a>
             <a href="../cart.php" class="menu-link">Giỏ hàng</a>
-            <a href="#3" class="menu-link">Liên hệ</a>
+            <a href="../contacts.php" class="menu-link">Liên hệ</a>
         </div>
         <div class="menu-icon close">
             <span></span>
@@ -44,9 +49,9 @@
             <div class="menulinks">
                 <a href="../index.php" class="menuLink">Trang chủ</a>
                 <a href="../shop.php" class="menuLink">Cửa hàng</a>
-                <a href="my_account.php?my_orders" class="menuLink">Tài khoản</a>
+                <a href="login.php" class="menuLink">Tài khoản</a>
                 <a href="../cart.php" class="menuLink">Giỏ hàng</a>
-                <a href="#" class="menuLink">Liên hệ</a>
+                <a href="../contacts.php" class="menuLink">Liên hệ</a>
             </div>
         </div>
         <div class="iconWrapper">

@@ -191,7 +191,7 @@ nav .menulinks {
 nav .menuLink {
   font-family: 'Barlow', sans-serif;
   box-sizing: initial;
-  color: #5D698D;
+  color: #fff;
   letter-spacing: 1px;
   font-size: 17px;
   margin-left: 30px;
@@ -459,7 +459,7 @@ nav .iconMenu {
 
 .wrapper .content .left {
     padding-top: 140px;
-    background-color: #f1f5f8;
+    background-color: #425383;
     position: relative;
 }
 
@@ -506,7 +506,7 @@ nav .iconMenu {
     align-items: center;
     font-size: 18px;
     font-weight: 400;
-    color: #2d3858;
+    color: #fff;
     letter-spacing: 0.03em;
     margin-bottom: 20px;
     position: relative;
@@ -562,7 +562,7 @@ nav .iconMenu {
 /* Right Main */
 
 .wrapper .content .right {
-    background-color: white;
+    background-color: #2d3858;
 }
 
 @media screen and (max-width: 799px) {
@@ -706,7 +706,7 @@ th {
 }
 
 td {
-    color: #9c9c9c;
+    color: #fff;
 }
 
 @media screen and (max-width: 799px) {
