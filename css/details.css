@@ -11,7 +11,9 @@
   color: inherit;
   box-sizing: border-box;
 }
-
+::-webkit-scrollbar {
+  display: none;
+}
 *:focus {
     outline: none;
 }
@@ -500,9 +502,9 @@ nav .iconMenu {
 }
 
 .wrapper .content .left .sliderNavigation .swiper-pagination .swiper-pagination-bullet-active {
-    width: 20px;
-    background-color: #9b3dda;
-    border: 1px solid #9b3dda;
+  width: 20px;
+  background-color: #3d8ada;
+  border: 1px solid #2d3858;
 }
 
 .wrapper .content .left .sliderNavigation .swiper-button-next,
@@ -580,8 +582,11 @@ nav .iconMenu {
 /* Details */
 
 .wrapper .content .right .rightContent {
+  background: rgb(45, 56, 88, 22%);
+  border-radius: 24px;
+  padding: 53px;
     max-width: 600px;
-    margin-top: 230px;
+    margin-top: 83px;
 }
 
 @media screen and (max-width: 799px) {
@@ -1611,12 +1616,12 @@ select {
 }
 
 .rating li.star.selected {
-  color: rgb(87, 228, 234);
+  color: rgb(61, 138, 218);
 }
 
 .rating .row-title {
   font-size: 20px;
-  color: #00BCD4;
+  color: rgb(61, 138, 218);
 }
 
 .rating .review-note {
@@ -1684,7 +1689,9 @@ select {
 /* cac comment */
 .col-lg-8 {
     flex: 0 0 auto;
-    width: 66.6666666667%;
+    width: 40.666667%;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 @media screen and (max-width: 799px) {
   .col-lg-8{
@@ -1729,7 +1736,7 @@ select {
 }
 
 .bg-light {
-  background-color: #f8f9fa!important;
+  background-color: #34464e!important;
 }
 .p-3 {
   padding: 1rem!important;
@@ -1848,6 +1855,8 @@ textarea.form-control {
 }
 .cmt .msg-header{
   width: 100%;
+  max-height: 592px;
+  overflow: auto;
 }
 .cmt .btn-2{
   margin-top: 5px;
@@ -1874,7 +1883,7 @@ textarea.form-control {
 }
 @media (max-width: 1023px){
   .commentBox {
-    margin: 0px 50px;
+    margin: 0px 23px;
   }
 }
 /* like comment */
@@ -1977,11 +1986,11 @@ textarea.form-control {
     width: fit-content;
     height: fit-content;
 }
-.btn-like .btn-like-title{
+.btn-like .btn-like-title,.btn-reply{
     position: relative;
     color: #fff;
     padding: 5px;
-    text-decoration: underline;
+    text-decoration: none;
     width: fit-content;
     height: fit-content;
     border-radius: 20%;
@@ -1989,7 +1998,12 @@ textarea.form-control {
     font-size: 11px;
     cursor: pointer;
     box-sizing: border-box;
-    position: relative;
+}
+.btn-reply .btn-reply-title,.btn-like .btn-like-title{
+  text-decoration: underline;
+}
+.clear{
+  clear: both;
 }
 .btn-like .btn-like-title i{
     position: absolute;
@@ -2152,11 +2166,15 @@ textarea.form-control {
 }
 
 .rateStar .rating-details .section-card {
+  background: #ffffff73;
+  border-radius: 24px;
+  margin: 8px;
   color: var(--primary-tap-blue);
   padding: var(--space-m12-w16) var(--space-m16-w20);
 }
 
 .rateStar .rating-details .section-card__header {
+  width: 97%;
   margin-bottom: 16px;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -2400,6 +2418,11 @@ textarea.form-control {
   width: 31px;
   height: 33px;
 }
+@media only screen and (min-width: 2360px){
+  .rateStar .rating-details .section-card__header{
+    width: 99%;
+  }
+}
 @media only screen and (max-width: 912px){
     .rateStar .rating-details .app-reviews__rating-statistics {
       padding-right: 0;
@@ -2407,6 +2430,9 @@ textarea.form-control {
   }
   .rateStar .rating-details .section-card {
     
+  }
+  .rateStar .rating-details .section-card__header{
+    width: 100%;
   }
   .rateStar .rating-details .section-card__header .section-card__header--left {
     margin-left: 30px;
@@ -2651,12 +2677,12 @@ textarea.form-control {
 }
 
 .product-other .cards {
-  margin: 0 auto;
-  width: 90%;
+  margin: 0px 112px;
+  width: 86.2%;
   border-radius: 10px;
   display: -ms-grid;
   display: grid;
-      grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
   background-color: #3c4b75;
   padding: 40px;
@@ -2665,7 +2691,9 @@ textarea.form-control {
 
 @media screen and (max-width: 799px) {
   .product-other .cards {
-    grid-gap: 0px;
+    grid-gap: 5px;
+    margin: 0 30px;
+    width: auto;
   }
 }
 
@@ -2685,7 +2713,7 @@ textarea.form-control {
 @media screen and (max-width: 799px) {
   .product-other .cards {
     grid-template-columns: repeat(2, 1fr);
-    padding: 0px 0px 0px 0px;
+    padding: 10px;
   }
 }
 
@@ -3044,5 +3072,31 @@ textarea.form-control {
 .product-other .card__icon .btn:hover:before {
   -webkit-transition: all 0.5s ease-in;
   transition: all 0.5s ease-in;
+}
+/* reply */
+.btn-reply .reply-content{
+  margin-top: 10px;
+}
+.btn-like .btn-like-title{
+}
+.btn-reply .btn-reply-title{
+  width: 100%;
+  text-align: start;
+}
+.btn-reply.hidden .reply-content{
+  display: none;
+}
+.reply-body{
+  position: relative;
+  padding: 10px 0px;
+}
+.reply-body .like-show{
+  bottom: -45px;
+}
+.display-none{
+  display: none;
+}
+.comment-replies-title{
+  
 }
 /*# sourceMappingURL=quan.css.map */

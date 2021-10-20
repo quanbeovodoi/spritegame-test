@@ -10,7 +10,7 @@
         $run_customer = mysqli_query($conn, $get_customer);
         $row_customer = mysqli_fetch_array($run_customer);
         $cus_id = $row_customer['customer_id'];
-        $comment_id=$_POST['comment_id'];
+        $comment_id = $_POST['comment_id'];
         //find_like_comments
         $get_likecomment = "SELECT * FROM likecomments WHERE id_comments = '$comment_id' AND id_cus='$cus_id'";
         $run_get_likecomment = mysqli_query($conn, $get_likecomment) or die("Error");

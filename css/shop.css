@@ -966,7 +966,7 @@ nav .iconMenu {
 
 @media screen and (max-width: 1280px) {
   .cards {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -978,8 +978,17 @@ nav .iconMenu {
 
 @media screen and (max-width: 799px) {
   .cards {
-        grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     padding: 40px 10px 40px 10px;
+  }
+  .cards p{
+    font-size: 14px;
+  }
+  .cards p.card__priceOriginal{
+    display: none;
+  }
+  .card__icon .btn{
+    font-size: 14px;
   }
 }
 
@@ -1294,7 +1303,22 @@ nav .iconMenu {
   -webkit-transition: all 0.5s ease-in;
   transition: all 0.5s ease-in;
 }
+@media screen and (max-width: 799px) {
+  .card__icon .btn {
+    height: 38px;
+    width: 80px;
+  }
+  .card__detail span{
+    display: none;
+  }
+}
 
+@media screen and (max-width: 320px) {
+  .card__icon .btn {
+    height: 38px;
+    width: 100%;
+  }
+}
 .pagination {
   display: -webkit-box;
   display: -ms-flexbox;

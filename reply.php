@@ -3,7 +3,7 @@
     session_start();
     include("includes/db.php");
     include("functions/functions.php");
-    if(isset($_SESSION['customer_email'])){
+    if(isset($_SESSION['customer_email'])&&$_POST['text']&&$_POST['product_id']&&$_POST['reply']){
         $session_email = $_SESSION['customer_email'];
         $get_customer = "select * from customers where customer_email='$session_email'";
         $run_customer = mysqli_query($conn, $get_customer);
@@ -11,7 +11,8 @@
         $cus_id = $row_customer['customer_id'];
         $getMesg = mysqli_real_escape_string($conn, $_POST['text']);
         $getPrdId = mysqli_real_escape_string($conn, $_POST['product_id']);
-        $insert_product = "INSERT INTO `comments` ( `product_id`, `id_cus`, `comment`) VALUES ('$getPrdId', '$cus_id', '$getMesg');";
+        $reply = $_POST['reply'];
+        $insert_product = "INSERT INTO `comments` ( `product_id`, `id_cus`, `comment`,`reply`) VALUES ('$getPrdId', '$cus_id', '$getMesg','$reply');";
         $run_query = mysqli_query($conn, $insert_product) or die("Error");
         $comment_id = mysqli_insert_id($conn);
         // echo "New record created successfully. Last inserted ID is: " . $comment_id;

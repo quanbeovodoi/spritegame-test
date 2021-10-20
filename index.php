@@ -223,6 +223,30 @@
     <!--Card-->
     <section class="wrapperCard">
         <h3 class="section__title">SpriteGame</h3>
+        <div class="r-2">
+            <div class="r-2-content">
+                <a href="shop.php">
+                    <div class="card anime">
+                        <div class="card__image">
+                            <img src="images/img1.jpg" alt="">
+                        </div>
+                        <div class="slide-text">
+                            <div class="btn">Shop</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="shop.php">
+                    <div class="card anime">
+                        <div class="card__image">
+                            <img src="images/img2.jpg" alt="">
+                        </div>
+                        <div class="slide-text">
+                            <div class="btn">Shop</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
         <!-- card-cate -->
         <div class="product-other">
             <h2 class="wrapperCard__title">Sản phẩm nổi bật</h2>
@@ -391,11 +415,11 @@
         </div>
         <div class="chatbot hidden">
             <div class="wrapper">
-                    <div class="title">Tư vấn</div>
+                    <div class="title">Sprite Game</div>
                     <div class="form">
                         <div class="bot-inbox inbox">
                             <div class="icon">
-                                <i class="fas fa-user"></i>
+                                <img src="images/tempsnip.png" alt="">
                             </div>
                             <div class="msg-header">
                                 <p>Sprite Game web cung cấp tai nguyên làm game tại Việt Nam</p>
@@ -487,7 +511,7 @@
                         type: 'POST',
                         data: 'text='+$value,
                         success: function(result){
-                            $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div>';
+                            $replay = '<div class="bot-inbox inbox"><div class="icon"><img src="images/tempsnip.png" alt=""></div><div class="msg-header"><p>'+ result +'</p></div></div>';
                             $(".form").append($replay);
                             // when chat goes down the scroll bar automatically comes to the bottom
                             $(".form").scrollTop($(".form")[0].scrollHeight);

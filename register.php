@@ -161,7 +161,7 @@
                     
                     <div class="input-wrapper">
                         <label for="address">Địa Chỉ</label>
-                        <textarea cols="30" rows="10" placeholder="Địa chỉ giao hàng" name="customer_address"></textarea>
+                        <textarea cols="30" rows="10" placeholder="Địa chỉ" name="customer_address"></textarea>
                     </div>
                     
                     <div class="input-wrapper">

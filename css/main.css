@@ -67,7 +67,7 @@ body {
     width: 0;
 }
 .button:hover{
-    color: #41bbac;
+    color: #418ebb;
 }
 
 .link {
@@ -224,7 +224,7 @@ nav .menuLink:before {
 }
 
 nav .menuLink.fixedLink:before {
-  background-color: #ffffff;
+  background-color: #91d7e0;
 }
 
 nav .menuLink:hover:before {
@@ -242,7 +242,7 @@ nav .menuLink.active:before {
 }
 
 nav .menuLink:hover {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 nav .menuLink.active {
@@ -438,7 +438,7 @@ nav .iconMenu {
 
 .swiper-slide:after {
     content: '';
-    background-image: linear-gradient(0deg, #adffd1, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    background-image: linear-gradient(0deg, #54dbff, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
     position: absolute;
     width: 100%;
     height: 100%;
@@ -767,7 +767,7 @@ button:focus {
 }
 @media screen and (max-width: 1320px){
     .cards{
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -958,7 +958,7 @@ button:focus {
 .card__detail {
     font-family: "Arial";
     text-transform: uppercase;
-    color: #69cec2;
+    color: #22475c;
     display: flex;
     align-items: center;
     font-weight: 400;
@@ -986,7 +986,7 @@ button:focus {
     height: 16px;
     background-color: transparent;
     border-radius: 100%;
-    border: solid 1px #69cec2;
+    border: solid 1px #22475c;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1003,8 +1003,8 @@ button:focus {
     border: 0;
     height: 40px;
     width: 40%;
-    background: linear-gradient(90deg, #69cec2 0%, #41bbac 100%);
-    border: solid 1px #69cec2;
+    background: #418ebb;
+    border: solid 1px #418ebb;
     border-radius: 4px;
     color: white;
     text-transform: uppercase;
@@ -1061,7 +1061,7 @@ button:focus {
 
 .card__icon .btn:before {
     transition: all 0.5s ease-out;
-    background-color: #69cec2;
+    background-color: #418ebb;
 }
 
 .card__icon .btn span {
@@ -1070,7 +1070,7 @@ button:focus {
 }
 
 .card__icon .btn:hover {
-    color: #69cec2;
+    color: #418ebb;
 }
 
 .card__icon .btn:hover:before,
@@ -1666,7 +1666,12 @@ button:focus {
     line-height: 40px;
     border-radius: 50%;
     font-size: 18px;
-    background: #007bff;
+    background: #91c6ff;
+}
+.chatbot .wrapper .form .inbox .icon img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
 }
 .chatbot .wrapper .form .inbox .msg-header{
     max-width: 53%;
@@ -2307,7 +2312,7 @@ button:focus {
   .product-other .card__detail {
     font-family: "Arial";
     text-transform: uppercase;
-    color: #69cec2;
+    color: #22475c;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2338,7 +2343,7 @@ button:focus {
     height: 16px;
     background-color: transparent;
     border-radius: 100%;
-    border: solid 1px #69cec2;
+    border: solid 1px #22475c;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2364,8 +2369,8 @@ button:focus {
     height: 40px;
     width: 40%;
     background: -webkit-gradient(linear, left top, right top, from(#69cec2), to(#41bbac));
-    background: linear-gradient(90deg, #69cec2 0%, #41bbac 100%);
-    border: solid 1px #69cec2;
+    background: #418ebb;
+    border: solid 1px #418ebb;
     border-radius: 4px;
     color: white;
     text-transform: uppercase;
@@ -2418,7 +2423,7 @@ button:focus {
   .product-other .card__icon .btn:before {
     -webkit-transition: all 0.5s ease-out;
     transition: all 0.5s ease-out;
-    background-color: #69cec2;
+    background-color: #418ebb;
   }
   
   .product-other .card__icon .btn span {
@@ -2428,7 +2433,7 @@ button:focus {
   }
   
   .product-other .card__icon .btn:hover {
-    color: #69cec2;
+    color: #418ebb;
   }
   
   .product-other .card__icon .btn:hover:before,
@@ -2447,3 +2452,60 @@ button:focus {
     -webkit-transition: all 0.5s ease-in;
     transition: all 0.5s ease-in;
   }
+.r-2-content{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+  width: fit-content;
+  margin: 0 auto;
+}
+.r-2 .card{
+  cursor: pointer;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+.r-2 .card::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: linear-gradient(0deg, #7a90b4 -55%, transparent);
+}
+.r-2 .card .slide-text{
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  top: 50%;
+  left: 0;
+  max-width: none;
+}
+.r-2 .card .slide-text .btn{
+  background: rgb(168 180 201 / 71%);
+  margin: 0 auto;
+  opacity: 0;
+  visibility: hidden;
+}
+.r-2 .card:hover .slide-text .btn{
+  opacity: 1;
+  visibility: visible;
+  transition: all .3s ease-in-out;
+}
+
+@media screen and (max-width:1440px) {
+  
+  .r-2 .card{width: 80%;}
+}
+
+@media screen and (max-width:560px) {
+  .r-2-content{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 30px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+}
